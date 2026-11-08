@@ -87,6 +87,16 @@ nav button.on{color:var(--g);font-weight:bold}
 .chips button{border:1px solid #D1D5DB;background:#fff;border-radius:18px;padding:7px 12px;font-size:13px}
 .chips button.on{background:var(--g);color:#fff;border-color:var(--g)}
 
+
+#ig{position:fixed;inset:0;z-index:9999;background:rgba(5,25,18,.985);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding:28px 22px 120px;overflow:auto;font-family:inherit}
+#ig.on{display:flex}#ig h2{font-family:Georgia,serif;color:var(--gold);font-size:24px;margin:8px 0 18px;text-align:center}
+#ig .st{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.45);border-radius:16px;padding:14px 16px;margin:7px 0;width:100%;max-width:380px;font-size:16px;line-height:1.35}
+#ig .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--g);font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:17px}
+#ig .ic{display:inline-flex;vertical-align:middle;background:#fff;color:#0a84ff;border-radius:7px;padding:2px 6px;margin:0 2px}
+#ig .x{position:absolute;top:14px;right:16px;background:none;border:0;color:#fff;font-size:30px}
+#ig .big{margin-top:16px}
+#ig .arrow{position:fixed;bottom:18px;font-size:46px;color:var(--gold);animation:bob 1s ease-in-out infinite;text-shadow:0 2px 8px #000}
+@keyframes bob{50%{transform:translateY(10px)}}
 </style>
 </head>
 <body>
@@ -117,17 +127,18 @@ nav button.on{color:var(--g);font-weight:bold}
     <a class="btn g" href="https://www.pgccislamicstore.com.au/s/search?q=kahf">Surah Al-Kahf books</a>
   </div>
 
+  <div class="card" id="install" style="display:none;border:2px solid var(--gold);text-align:center">
+    <div class="kick">Get the app</div>
+    <p style="margin:6px 0 12px;font-size:15px" id="inst-txt">Put the PGCC Islamic Store app on your phone. It takes 10 seconds.</p>
+    <button class="btn g" id="inst-btn" type="button" style="font-size:16px;padding:13px 26px">Install app</button>
+  </div>
+
+<div id="ig" role="dialog" aria-label="How to install the app"><button class="x" type="button" aria-label="Close">&times;</button><h2 id="ig-h"></h2><div id="ig-b" style="width:100%;display:flex;flex-direction:column;align-items:center"></div><div class="arrow" id="ig-a" style="display:none">&#11015;</div></div>
   <div class="card daily">
     <div class="kick" id="dl-kind">Today's reminder</div>
     <div class="q" id="dl-text"></div>
     <div class="src" id="dl-src"></div>
   </div>
-  <div class="card" id="install" style="display:none;border:2px solid var(--gold)">
-    <div class="kick">Add to your home screen</div>
-    <p style="margin:6px 0 10px;font-size:14.5px" id="inst-txt">Keep the PGCC Islamic Store app one tap away.</p>
-    <button class="btn g" id="inst-btn" type="button">Add to home screen</button>
-  </div>
-
   <div class="card" id="share">
     <div class="kick">Share the app</div>
     <p style="margin:6px 0 10px;font-size:14.5px" id="share-txt">Know someone who would love prayer times, Qibla and our offers? Send them the free app.</p>
@@ -388,18 +399,50 @@ var DAILY=[
  draw();
 })();
 
-/* ---------- add to home screen ---------- */
+/* ---------- add to home screen (easy install) ---------- */
 (function(){
- var ua=navigator.userAgent,isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isAnd=/Android/i.test(ua);
  var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
- if(standalone||!/iPhone|iPad|iPod|Android|Mobi/i.test(ua)&&!isIOS)return;
- var card=document.getElementById('install'),btn=document.getElementById('inst-btn'),txt=document.getElementById('inst-txt'),dp=null;
+ if(standalone||!(isIOS||isAnd||/Mobi/i.test(ua)))return;
+ var inApp=/Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger|WhatsApp|TikTok|musical_ly|Bytedance|Snapchat|Line\/|GSA\//i.test(ua);
+ var iosChrome=/CriOS|EdgiOS|FxiOS/.test(ua);
+ var URL_='https://app.pgccislamicstore.com.au/?src=install';
+ var card=document.getElementById('install'),btn=document.getElementById('inst-btn'),txt=document.getElementById('inst-txt');
+ var ov=document.getElementById('ig'),H=document.getElementById('ig-h'),B=document.getElementById('ig-b'),A=document.getElementById('ig-a'),dp=null;
+ var SH='<span class="ic"><svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="#0a84ff" stroke-width="1.8"><path d="M8 11V1M4.5 4.5L8 1l3.5 3.5"/><path d="M4 7H2v10h12V7h-2"/></svg></span>';
+ var PLUS='<span class="ic" style="font-weight:bold">&#65291;</span>';
+ function st(n,h){return '<div class="st"><div class="n">'+n+'</div><div>'+h+'</div></div>';}
+ function open(h,body,arrow){H.innerHTML=h;B.innerHTML=body;A.style.display=arrow?'block':'none';ov.classList.add('on');}
+ ov.querySelector('.x').onclick=function(){ov.classList.remove('on');};
  card.style.display='block';
- if(isIOS){btn.style.display='none';txt.innerHTML='Tap the <b>Share</b> button in Safari, then <b>Add to Home Screen</b>, then <b>Add</b>.';}
- else{txt.innerHTML='Tap the button below, or open the browser menu <b>&#8942;</b> and choose <b>Install app</b> / <b>Add to Home screen</b>.';}
+ if(inApp){
+  txt.innerHTML='You opened this inside another app. Open it in your phone\'s browser to install.';
+  btn.textContent=isIOS?'Open in Safari':'Open in Chrome';
+ }
  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;});
- btn.addEventListener('click',function(){if(dp){dp.prompt();dp.userChoice.then(function(){dp=null})}else{txt.innerHTML='Open the browser menu <b>&#8942;</b> (top right) and choose <b>Install app</b> or <b>Add to Home screen</b>.'}});
- window.addEventListener('appinstalled',function(){card.style.display='none'});
+ window.addEventListener('appinstalled',function(){card.style.display='none';ov.classList.remove('on');});
+ btn.addEventListener('click',function(){
+  if(inApp){
+   if(isAnd){location.href='intent://app.pgccislamicstore.com.au/?src=install#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(URL_)+';end';return;}
+   try{location.href='x-safari-'+URL_;}catch(e){}
+   setTimeout(function(){open('Open in Safari',
+    st(1,'Tap <b>&#8943;</b> or <b>&#8942;</b> at the top or bottom of this screen')+
+    st(2,'Choose <b>Open in browser</b> / <b>Open in Safari</b>')+
+    st(3,'Then tap <b>Install app</b> again')+
+    '<button class="btn g big" type="button" id="ig-copy">Copy app link</button>',false);
+    var c=document.getElementById('ig-copy');c.onclick=function(){(navigator.clipboard?navigator.clipboard.writeText(URL_):Promise.reject()).then(function(){c.textContent='Copied - paste it in Safari';},function(){c.textContent='app.pgccislamicstore.com.au';});};
+   },700);return;
+  }
+  if(dp){dp.prompt();dp.userChoice.then(function(){dp=null;});return;}
+  if(isIOS&&iosChrome){open('Install on iPhone',st(1,'Tap '+SH+' <b>Share</b> (top right, next to the address)')+st(2,'Tap <b>Add to Home Screen</b>')+st(3,'Tap <b>Add</b>. Done!'),false);return;}
+  if(isIOS){open('Install in 3 easy taps',
+    st(1,'Tap '+SH+' <b>Share</b> at the bottom of Safari<br><small style="opacity:.8">Newer iPhones: tap <b>&#8943;</b> first, then Share</small>')+
+    st(2,'Scroll down, tap '+PLUS+' <b>Add to Home Screen</b>')+
+    st(3,'Tap <b>Add</b>. The PGCC Store icon appears on your Home Screen')+
+    '<p style="max-width:380px;margin:12px 0 0;opacity:.85;text-align:center">Then open it from the icon and tap <b>Turn on notifications</b></p>',true);return;}
+  open('Install the app',st(1,'Tap <b>&#8942;</b> (top right of Chrome)')+st(2,'Tap <b>Install app</b> or <b>Add to Home screen</b>')+st(3,'Tap <b>Install</b>. Done!'),false);
+ });
+ if(isIOS&&!inApp&&!/pgcc_ig_seen/.test(document.cookie)){document.cookie='pgcc_ig_seen=1;max-age=2592000;path=/';}
 })();
 
 /* ---------- share the app ---------- */
