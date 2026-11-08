@@ -97,6 +97,18 @@ nav button.on{color:var(--g);font-weight:bold}
 #ig .big{margin-top:16px}
 #ig .arrow{position:fixed;bottom:18px;font-size:46px;color:var(--gold);animation:bob 1s ease-in-out infinite;text-shadow:0 2px 8px #000}
 @keyframes bob{50%{transform:translateY(10px)}}
+
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 10px;margin-top:6px}
+.cat{text-decoration:none;color:var(--tx);text-align:center;font-size:13px;line-height:1.25}
+.cat img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;border:2px solid var(--gold);background:#fff;display:block;margin-bottom:6px}
+.bigbtn{display:block;text-align:center;background:var(--g);color:var(--gold);text-decoration:none;font-weight:bold;border-radius:14px;padding:15px;font-size:16px;margin:12px 0}
+.deal{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:10px;text-decoration:none;color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.08);margin:10px 0}
+.deal img{width:84px;height:84px;object-fit:contain;border-radius:10px;background:#fff}
+.deal b{display:block;font-family:Georgia,serif;font-weight:normal;color:var(--g);font-size:17px;margin:3px 0}.deal span{font-size:13px;color:var(--mut)}
+.code{border:2px dashed var(--gold);border-radius:14px;padding:14px;text-align:center;background:#fffaf0}
+.code .c{font-size:26px;font-weight:bold;letter-spacing:3px;color:var(--g);margin:6px 0}
+.morelist a,.morelist button{display:flex;align-items:center;gap:14px;width:100%;background:#fff;border:0;border-radius:14px;padding:16px;margin:10px 0;font-size:16px;color:var(--tx);text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:left;font-family:inherit;cursor:pointer}
+.morelist svg{width:24px;height:24px;stroke:var(--g);fill:none;stroke-width:1.8;flex:none}
 </style>
 </head>
 <body>
@@ -227,14 +239,41 @@ nav button.on{color:var(--g);font-weight:bold}
     </div>
   </div>
 </section>
+<section class="view" id="v-shop">
+  <h2>Shop</h2>
+  <form class="search" action="https://www.pgccislamicstore.com.au/s/search" method="get"><input type="search" name="q" placeholder="Search Qurans, dates, perfumes..." aria-label="Search products"><button type="submit">Search</button></form>
+  <a class="bigbtn" href="https://www.pgccislamicstore.com.au/s/shop">Shop all products &rarr;</a>
+  <div class="cats"><a class="cat" href="https://www.pgccislamicstore.com.au/shop/quran-and-tafseer/9"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/58981334391eaafc38011abc7de324d5e81a3d2c/original.jpeg" alt="" loading="lazy"><span>Qurans</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/islamic-books/3NHLSB4L6DEHP3XB5RAN6SHO"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/ed6093f3826fc9f0da6634de3a18dce4eae584cf/original.jpeg" alt="" loading="lazy"><span>Islamic Books</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/little-muslims/CHABZEQZOQACCDGRA5XUJAWL"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c291a33f492a37da0e41e61a290921afb92d952a/original.jpeg" alt="" loading="lazy"><span>Kids</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/maktab-curriculum-resources/OZ57JKKCGDLMAG4MM56BD4RY"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/f128a2aa52d398a604e4e702f5db90b9300c5fec/original.jpeg" alt="" loading="lazy"><span>Maktab</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/arabian-perfumes-attars/67"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/997ca7e45f413329aa78a4e653723aef0d28e38a/original.jpeg" alt="" loading="lazy"><span>Perfumes &amp; Attars</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/islamic-essentials/B2MPRI46OTLXXJOJO6PPJRV2"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/43e1977821dc689514f7b28fd0571f1916ac1523/original.jpeg" alt="" loading="lazy"><span>Prayer Essentials</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/womens-collection/VHAO2XF3QFWLYLDF4IO6CJPM"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c5b4ee206eb1e5d0b86d8e2c9ee037d31a19c915/original.jpeg" alt="" loading="lazy"><span>Women</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/mens-collection/EIF4JFADRWD2D4JPHUFMBA3P"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c4322ca9419b7400402f5a26321951a9758bc7fa/original.jpeg" alt="" loading="lazy"><span>Men</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/dates/64"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/202d2061bb048689f378822a1ffa2e2bb5ea689b/original.jpeg" alt="" loading="lazy"><span>Dates</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/zam-zam-water/29"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/f780c5ffd6ba4bd9b3ebbb172e4864e728ba4391/original.jpeg" alt="" loading="lazy"><span>Zam Zam Water</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/food-health/F4GUBJNFNBDKCZCQ2GUBV7SN"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/a86b4711406beebc000d371f4315b548948c45de/original.jpeg" alt="" loading="lazy"><span>Food &amp; Health</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/home-lifestyle/AEOOBQV2PA4TOE5ZUNTX4RDX"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/1a19ee8ccfe0244a085bfda529e6ca757d8a0cea/original.jpeg" alt="" loading="lazy"><span>Home &amp; Living</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/hajj-umrah/97"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/d40785be487602e76b5408613f8af048b5101b86/original.jpeg" alt="" loading="lazy"><span>Hajj &amp; Umrah</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/ramadan-eid/5IIHGBEAZSCGPVLH4H6AAX7P"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/5e71587fe743efd93fbbfe42df2074ae3a1ce45d/original.jpeg" alt="" loading="lazy"><span>Ramadan &amp; Eid</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/online-only/TOJY7FNKLPLC7II2DHR6VNDP"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/01b0d97daa105954bda4c2b770effc9c3cf2d090/original.png" alt="" loading="lazy"><span>Online Only</span></a></div>
+  <p style="text-align:center;font-size:13px;color:var(--mut);margin-top:18px">Free shipping Australia-wide over $250 &middot; Free click &amp; collect in Doveton &middot; Afterpay</p>
+</section>
+
+<section class="view" id="v-deals">
+  <h2>Deals &amp; offers</h2>
+  <a class="bigbtn" href="https://www.pgccislamicstore.com.au/shop/barakah-deals/G6Z7PSYIRN7Y6YSCKJDI4VBO">See all Barakah Deals &rarr;</a>
+  <div id="deals"></div>
+  <div class="code"><div class="kick">Welcome offer</div><div class="c">WELCOME5</div><div style="font-size:14px">5% off your first online order. Enter the code at checkout.</div></div>
+  <a class="deal" href="https://www.pgccislamicstore.com.au/shop/online-only/TOJY7FNKLPLC7II2DHR6VNDP"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/01b0d97daa105954bda4c2b770effc9c3cf2d090/original.png" alt="" loading="lazy"><div><div class="kick">Online only</div><b>Shop online-only items</b><span>Shipping or pickup in Doveton</span></div></a>
+</section>
+
+<section class="view" id="v-more">
+  <h2>More</h2>
+  <div class="morelist">
+    <button type="button" data-go="qibla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>Qibla direction</button>
+    <button type="button" data-go="duas"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></svg>Tasbih, dhikr &amp; duas</button>
+    <button type="button" data-go="visit"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Visit us, opening hours &amp; contact</button>
+    <a href="https://www.pgccislamicstore.com.au/s/order"><svg viewBox="0 0 24 24"><path d="M6 6h15l-2 8H8z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M6 6L5 3H2"/></svg>My cart</a>
+    <a href="https://wa.me/61402301235"><svg viewBox="0 0 24 24"><path d="M4 20l1.5-4A8 8 0 1 1 9 19.5z"/></svg>WhatsApp us</a>
+  </div>
+</section>
+
 </main>
 
 <nav>
   <button class="on" data-v="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</button>
+  <button data-v="shop"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Shop</button>
+  <button data-v="deals"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.5"/></svg>Deals</button>
   <button data-v="prayer"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Prayer</button>
-  <button data-v="qibla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>Qibla</button>
-  <button data-v="duas"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></svg>Dhikr</button>
-  <button data-v="visit"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Visit</button>
+  <button data-v="more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>More</button>
 </nav>
 
 <script>
@@ -243,9 +282,10 @@ var NAMES=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
 
 /* ---------- navigation ---------- */
 function show(v){document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});
-  document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)});window.scrollTo(0,0);
+  var nv=({qibla:1,duas:1,visit:1})[v]?'more':v;document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
   try{history.replaceState(null,'','#'+v)}catch(e){}}
 document.querySelectorAll('nav button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v)})});
+document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
 function fromHash(){var h=location.hash.slice(1);if(h&&document.getElementById('v-'+h))show(h)}fromHash();window.addEventListener('hashchange',fromHash);
 
 /* ---------- helpers ---------- */
@@ -302,6 +342,7 @@ renderPrayer();setInterval(renderPrayer,30000);
 /* ---------- offers + new arrivals (data.json) ---------- */
 fetch('data.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
   document.getElementById('offers').innerHTML=d.offers.map(function(o){return '<a class="offer" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div class="t"><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
+  var dl=document.getElementById('deals');if(dl)dl.innerHTML=d.offers.filter(function(o){return !/WELCOME5/i.test(o.title+' '+o.text)}).map(function(o){return '<a class="deal" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
   document.getElementById('newin').innerHTML=d.newArrivals.map(function(p){return '<a class="prod" href="'+esc(p.link)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy"><div class="n">'+esc(p.name)+'</div><div class="p">$'+(+p.price).toFixed(2).replace(/\.00$/,'')+'</div></a>'}).join('');
 }).catch(function(){});
 
