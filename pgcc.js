@@ -97,3 +97,6 @@ var s=document.createElement('style');s.textContent='.store-policy--margin-top .
   var n=0;var iv=setInterval(function(){add();if(++n>12)clearInterval(iv);},2500);
   if(document.readyState!=='loading')add();else document.addEventListener('DOMContentLoaded',add);
 })();
+
+/* PGCC product photos on phones: hide green side strips and peeking photos */
+(function(){if(document.getElementById('pgcc-gallery-fix'))return;var s=document.createElement('style');s.id='pgcc-gallery-fix';s.textContent='@media (max-width:767px){.product-gallery .carousel__container{clip-path:inset(0 24px)}}';document.head.appendChild(s)})();
