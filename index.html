@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="PGCC Store">
+<meta name="apple-mobile-web-app-title" content="PGCC Islamic Store">
 <link rel="manifest" href="manifest.webmanifest">
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(OneSignal){await OneSignal.init({appId:"0082ccbb-94d3-46de-8095-ad06738e8470"});});</script>
@@ -122,6 +122,12 @@ nav button.on{color:var(--g);font-weight:bold}
     <div class="q" id="dl-text"></div>
     <div class="src" id="dl-src"></div>
   </div>
+  <div class="card" id="install" style="display:none;border:2px solid var(--gold)">
+    <div class="kick">Add to your home screen</div>
+    <p style="margin:6px 0 10px;font-size:14.5px" id="inst-txt">Keep the PGCC app one tap away.</p>
+    <button class="btn g" id="inst-btn" type="button">Add to home screen</button>
+  </div>
+
   <div class="card" id="notif">
     <div class="kick">Stay updated</div>
     <p style="margin:6px 0 12px;font-size:14.5px">Get a notification for new offers, and for Ramadan, Eid and Hajj reminders.</p>
@@ -371,6 +377,20 @@ var DAILY=[
  document.getElementById('tb-tap').addEventListener('click',function(){st.c++;if(navigator.vibrate)navigator.vibrate(st.c===DH[st.i][1]?[60,60,60]:15);save();draw()});
  document.getElementById('tb-reset').addEventListener('click',function(){st.c=0;save();draw()});
  draw();
+})();
+
+/* ---------- add to home screen ---------- */
+(function(){
+ var ua=navigator.userAgent,isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+ if(standalone||!/iPhone|iPad|iPod|Android|Mobi/i.test(ua)&&!isIOS)return;
+ var card=document.getElementById('install'),btn=document.getElementById('inst-btn'),txt=document.getElementById('inst-txt'),dp=null;
+ card.style.display='block';
+ if(isIOS){btn.style.display='none';txt.innerHTML='Tap the <b>Share</b> button in Safari, then <b>Add to Home Screen</b>, then <b>Add</b>.';}
+ else{txt.innerHTML='Tap the button below, or open the browser menu <b>&#8942;</b> and choose <b>Install app</b> / <b>Add to Home screen</b>.';}
+ window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;});
+ btn.addEventListener('click',function(){if(dp){dp.prompt();dp.userChoice.then(function(){dp=null})}else{txt.innerHTML='Open the browser menu <b>&#8942;</b> (top right) and choose <b>Install app</b> or <b>Add to Home screen</b>.'}});
+ window.addEventListener('appinstalled',function(){card.style.display='none'});
 })();
 
 /* ---------- push notifications (OneSignal) ---------- */
