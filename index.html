@@ -11,6 +11,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PGCC Store">
 <link rel="manifest" href="manifest.webmanifest">
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(OneSignal){await OneSignal.init({appId:"0082ccbb-94d3-46de-8095-ad06738e8470"});});</script>
 <link rel="icon" href="https://www.pgccislamicstore.com.au/uploads/b/4ae7d650-ceb4-11eb-9077-d1bc653220ff/icon_180x180_ios_ODg2OT.png?width=180">
 <link rel="apple-touch-icon" href="https://www.pgccislamicstore.com.au/uploads/b/4ae7d650-ceb4-11eb-9077-d1bc653220ff/icon_180x180_ios_ODg2OT.png?width=180">
 <style>
@@ -371,8 +373,17 @@ var DAILY=[
  draw();
 })();
 
-/* ---------- service worker ---------- */
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
+/* ---------- push notifications (OneSignal) ---------- */
+(function(){
+ var card=document.getElementById('notif'),btn=document.getElementById('notif-btn');
+ var ua=navigator.userAgent,isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+ function upd(){ if(!('Notification' in window)){ if(isIOS&&!standalone){card.style.display='block';btn.style.display='none';card.querySelector('p').textContent='To get notifications on iPhone, first add this app to your Home Screen (Share, then Add to Home Screen), then open it from the icon.';} return; }
+  card.style.display=Notification.permission==='granted'?'none':'block';
+  if(Notification.permission==='denied'){btn.style.display='none';card.querySelector('p').textContent='Notifications are blocked. You can turn them on in your phone settings for this app.';} }
+ upd();
+ btn.addEventListener('click',function(){window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(OS){try{await OS.Notifications.requestPermission()}catch(e){}upd()})});
+})();
 </script>
 </body>
 </html>
