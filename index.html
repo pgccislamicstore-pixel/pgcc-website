@@ -128,6 +128,15 @@ nav button.on{color:var(--g);font-weight:bold}
     <button class="btn g" id="inst-btn" type="button">Add to home screen</button>
   </div>
 
+  <div class="card" id="share">
+    <div class="kick">Share the app</div>
+    <p style="margin:6px 0 10px;font-size:14.5px" id="share-txt">Know someone who would love prayer times, Qibla and our offers? Send them the free app.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn g" id="share-btn" type="button">Share app</button>
+      <a class="btn" id="share-wa" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">WhatsApp</a>
+    </div>
+  </div>
+
   <div class="card" id="notif">
     <div class="kick">Stay updated</div>
     <p style="margin:6px 0 12px;font-size:14.5px">Get a notification for new offers, and for Ramadan, Eid and Hajj reminders.</p>
@@ -391,6 +400,19 @@ var DAILY=[
  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;});
  btn.addEventListener('click',function(){if(dp){dp.prompt();dp.userChoice.then(function(){dp=null})}else{txt.innerHTML='Open the browser menu <b>&#8942;</b> (top right) and choose <b>Install app</b> or <b>Add to Home screen</b>.'}});
  window.addEventListener('appinstalled',function(){card.style.display='none'});
+})();
+
+/* ---------- share the app ---------- */
+(function(){
+ var url='https://app.pgccislamicstore.com.au/?src=share';
+ var msg='Get the free PGCC Islamic Store app \u2013 prayer times, Qibla, tasbih and our latest offers:';
+ var full=msg+' '+url, t=document.getElementById('share-txt');
+ document.getElementById('share-wa').href='https://wa.me/?text='+encodeURIComponent(full);
+ document.getElementById('share-btn').addEventListener('click',function(){
+  if(navigator.share){navigator.share({title:'PGCC Islamic Store',text:msg,url:url}).catch(function(){});return;}
+  if(navigator.clipboard){navigator.clipboard.writeText(full).then(function(){t.textContent='Link copied \u2013 paste it into WhatsApp, Instagram or a message.';},function(){window.open('https://wa.me/?text='+encodeURIComponent(full),'_blank');});}
+  else window.open('https://wa.me/?text='+encodeURIComponent(full),'_blank');
+ });
 })();
 
 /* ---------- push notifications (OneSignal) ---------- */
