@@ -72,7 +72,7 @@ var s=document.createElement('style');s.textContent='.store-policy--margin-top .
     bar.id = 'pgcc-app';
     bar.setAttribute('role', 'dialog');
     bar.setAttribute('aria-label', 'Get the PGCC Islamic Store app');
-    bar.innerHTML = '<img src="' + ICON + '" alt=""><div class="t"><b>Get the free PGCC app</b><span>Prayer times, Qibla, tasbih and our latest offers</span></div>' +
+    bar.innerHTML = '<img src="' + ICON + '" alt=""><div class="t"><b>Get the free PGCC Islamic Store app</b><span>Prayer times, Qibla, tasbih and our latest offers</span></div>' +
       '<a class="add" href="' + APP + '">Get app</a><button type="button" class="x" aria-label="Close">&times;</button>';
     document.body.appendChild(bar);
     requestAnimationFrame(function () { requestAnimationFrame(function () { bar.classList.add('show'); }); });
@@ -80,4 +80,20 @@ var s=document.createElement('style');s.textContent='.store-policy--margin-top .
     bar.querySelector('.add').addEventListener('click', function () { store('opened'); });
   }
   setTimeout(show, 5000);
+})();
+
+/* PGCC footer: link to the PGCC Islamic Store app */
+(function(){
+  function add(){
+    var f=document.querySelector('footer');
+    if(!f||document.getElementById('pgcc-footer-app'))return;
+    var w=document.createElement('div');w.id='pgcc-footer-app';w.style.cssText='text-align:center;margin:12px 0 6px';
+    var a=document.createElement('a');a.href='https://app.pgccislamicstore.com.au/?src=footer';a.textContent='\uD83D\uDCF2 Get the PGCC Islamic Store app';
+    a.style.cssText='color:inherit;font-weight:bold;text-decoration:underline';w.appendChild(a);
+    var c=[].slice.call(f.querySelectorAll('p,div,span')).filter(function(e){return /0402 301 235/.test(e.textContent)&&e.children.length<3;});
+    var t=c[c.length-1];
+    if(t&&t.parentNode)t.parentNode.insertBefore(w,t.nextSibling);else f.appendChild(w);
+  }
+  var n=0;var iv=setInterval(function(){add();if(++n>12)clearInterval(iv);},2500);
+  if(document.readyState!=='loading')add();else document.addEventListener('DOMContentLoaded',add);
 })();
