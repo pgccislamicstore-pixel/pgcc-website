@@ -1,0 +1,17 @@
+{
+  "name": "PGCC Islamic Store",
+  "short_name": "PGCC Store",
+  "description": "Offers, new arrivals, prayer times for Doveton, Qibla and daily duas from PGCC Islamic Store.",
+  "id": "/",
+  "start_url": "/?src=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F3D2E",
+  "theme_color": "#0F3D2E",
+  "icons": [
+    {"src": "https://www.pgccislamicstore.com.au/uploads/b/4ae7d650-ceb4-11eb-9077-d1bc653220ff/icon_512x512_android_NDUzND.png?width=192", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "https://www.pgccislamicstore.com.au/uploads/b/4ae7d650-ceb4-11eb-9077-d1bc653220ff/icon_512x512_android_NDUzND.png?width=512", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "https://www.pgccislamicstore.com.au/uploads/b/4ae7d650-ceb4-11eb-9077-d1bc653220ff/icon_512x512_android_NDUzND.png?width=512", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
