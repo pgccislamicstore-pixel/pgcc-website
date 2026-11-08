@@ -40,3 +40,67 @@ var s=document.createElement('style');s.textContent='.store-policy--margin-top .
 
 /* PGCC email sign-up pop-up (Brevo form) */
 !function(){var t="pgcc_signup_popup_seen";function e(){try{localStorage.setItem(t,String(Date.now()))}catch(t){}}(function(){try{var e=parseInt(localStorage.getItem(t)||"0",10);return e&&Date.now()-e<12096e5}catch(t){return!1}})()||/\/(checkout|cart)/i.test(location.pathname)||setTimeout((function(){if(!document.getElementById("pgcc-signup")){var t=document.createElement("div");t.id="pgcc-signup",t.setAttribute("role","dialog"),t.setAttribute("aria-label","Join our mailing list"),t.style.cssText="position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;",t.innerHTML='<div style="position:relative;width:100%;max-width:540px;background:#fff;border-top:6px solid #0F3D2E;box-shadow:0 10px 40px rgba(0,0,0,.3);"><button type="button" aria-label="Close" id="pgcc-signup-x" style="position:absolute;top:6px;right:10px;border:0;background:none;font-size:28px;line-height:1;cursor:pointer;color:#555;">&times;</button><iframe src="https://63082bf9.sibforms.com/serve/MUIFAJ9lzuKiVaNHS8KmwOW8Ed5KdUbAN2bflRDMkyHJB-lXQxtNRaSEE5SR5SOuVocxHhgq0qFnO7BiQUrm-iL2iQBqYnYdVH3Xm7dJOgVKdZC-CEQw6WiRFWdzouhLnw1ebzhGhwJYYXIpQT5O_EADeyRtEyKyH58ru00-ifg8TRXUBnYdDzqknCdArcrLYbPEg1Wv12uMHTHCAw==" title="Join our mailing list" style="display:block;width:100%;height:420px;border:0;"></iframe></div>',t.addEventListener("click",(function(e){e.target===t&&n()})),document.body.appendChild(t),document.getElementById("pgcc-signup-x").addEventListener("click",n),document.addEventListener("keydown",(function t(e){"Escape"===e.key&&(n(),document.removeEventListener("keydown",t))})),e()}function n(){e(),t.remove()}}),8e3)}();
+
+/* PGCC app: "Add to home screen" banner (phones only) */
+(function () {
+  var KEY = 'pgcc_app_banner';
+  var ICON = '/uploads/b/4ae7d650-ceb4-11eb-9077-d1bc653220ff/icon_180x180_ios_ODg2OT.png?width=180';
+  var deferred = null;
+  function store(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function read() { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isPhone = isIOS || /Android|Mobi/i.test(ua);
+  var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; });
+  window.addEventListener('appinstalled', function () { store('installed'); hide(); });
+  if (!isPhone || standalone) return;
+  if (/\/(checkout|cart)/i.test(location.pathname)) return;
+  var s = read();
+  if (s === 'installed') return;
+  if (/^\d+$/.test(s) && Date.now() - parseInt(s, 10) < 30 * 864e5) return;
+
+  var css = '#pgcc-app{position:fixed;left:10px;right:10px;bottom:10px;z-index:99998;background:#0F3D2E;color:#fff;border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35);font-family:Arial,Helvetica,sans-serif;padding:12px;display:flex;align-items:center;gap:12px;transform:translateY(140%);transition:transform .4s ease}' +
+    '#pgcc-app.show{transform:none}#pgcc-app img{width:48px;height:48px;border-radius:11px;flex:none}' +
+    '#pgcc-app .t{flex:1;min-width:0}#pgcc-app b{display:block;font-size:15px;color:#D4AF37}#pgcc-app span{display:block;font-size:12.5px;line-height:1.3;opacity:.92}' +
+    '#pgcc-app .add{flex:none;background:#D4AF37;color:#0F3D2E;border:0;border-radius:20px;padding:9px 16px;font-weight:bold;font-size:14px;cursor:pointer}' +
+    '#pgcc-app .x{flex:none;background:none;border:0;color:#fff;font-size:22px;line-height:1;padding:0 2px;cursor:pointer;opacity:.8}' +
+    '#pgcc-app-help{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center}' +
+    '#pgcc-app-help .p{background:#fff;color:#1F2937;width:100%;max-width:480px;border-radius:16px 16px 0 0;padding:22px 20px 28px;font-family:Arial,Helvetica,sans-serif;border-top:5px solid #D4AF37}' +
+    '#pgcc-app-help h3{margin:0 0 12px;color:#0F3D2E;font-size:18px}#pgcc-app-help ol{margin:0 0 16px 18px;padding:0;font-size:15px;line-height:1.7}' +
+    '#pgcc-app-help button{width:100%;background:#0F3D2E;color:#fff;border:0;border-radius:10px;padding:12px;font-size:15px;font-weight:bold}';
+  var bar;
+  function hide() { if (bar) { bar.classList.remove('show'); setTimeout(function () { bar && bar.remove(); }, 450); } }
+  function help() {
+    var steps = isIOS
+      ? '<li>Tap the <b>Share</b> button <span style="font-size:18px">&#x2B06;&#xFE0E;</span> (bottom of Safari, or top right in Chrome)</li><li>Scroll down and tap <b>Add to Home Screen</b></li><li>Tap <b>Add</b></li>'
+      : '<li>Tap the browser menu <b>&#8942;</b> (top right)</li><li>Tap <b>Add to Home screen</b> or <b>Install app</b></li><li>Tap <b>Add</b> / <b>Install</b></li>';
+    var h = document.createElement('div');
+    h.id = 'pgcc-app-help';
+    h.innerHTML = '<div class="p"><h3>Add PGCC Islamic Store to your phone</h3><ol>' + steps + '</ol><button type="button">Got it</button></div>';
+    h.addEventListener('click', function (e) { if (e.target === h || e.target.tagName === 'BUTTON') h.remove(); });
+    document.body.appendChild(h);
+  }
+  function show() {
+    if (document.getElementById('pgcc-app')) return;
+    if (document.getElementById('pgcc-signup')) { setTimeout(show, 3000); return; }
+    var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+    bar = document.createElement('div');
+    bar.id = 'pgcc-app';
+    bar.setAttribute('role', 'dialog');
+    bar.setAttribute('aria-label', 'Get the PGCC Islamic Store app');
+    bar.innerHTML = '<img src="' + ICON + '" alt=""><div class="t"><b>Get the PGCC app</b><span>One tap to our offers, new arrivals and Ramadan &amp; Eid gifts</span></div>' +
+      '<button type="button" class="add">Add</button><button type="button" class="x" aria-label="Close">&times;</button>';
+    document.body.appendChild(bar);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { bar.classList.add('show'); }); });
+    bar.querySelector('.x').addEventListener('click', function () { store(String(Date.now())); hide(); });
+    bar.querySelector('.add').addEventListener('click', function () {
+      store(String(Date.now()));
+      if (deferred) {
+        deferred.prompt();
+        deferred.userChoice.then(function (c) { if (c && c.outcome === 'accepted') store('installed'); deferred = null; hide(); });
+      } else { hide(); help(); }
+    });
+  }
+  setTimeout(show, 5000);
+})();
