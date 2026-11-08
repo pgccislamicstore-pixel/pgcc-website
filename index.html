@@ -45,6 +45,7 @@ h2{font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:var(--g)
 .prod img{width:100%;aspect-ratio:1;object-fit:contain;border-radius:8px;background:#fff}
 .prod .n{font-size:13px;line-height:1.3;margin:6px 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px}
 .prod .p{font-weight:bold;color:var(--gold2);font-size:14px}
+.prod{position:relative}.prod .bdg{position:absolute;top:8px;left:8px;background:var(--g);color:var(--gold);font-size:11px;font-weight:bold;border-radius:10px;padding:3px 8px}
 table.pt{width:100%;border-collapse:collapse;font-size:16px}
 table.pt td{padding:12px 6px;border-bottom:1px solid #EEE}
 table.pt td:last-child{text-align:right;font-weight:bold;font-variant-numeric:tabular-nums}
@@ -343,7 +344,7 @@ renderPrayer();setInterval(renderPrayer,30000);
 fetch('data.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
   document.getElementById('offers').innerHTML=d.offers.map(function(o){return '<a class="offer" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div class="t"><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
   var dl=document.getElementById('deals');if(dl)dl.innerHTML=d.offers.filter(function(o){return !/WELCOME5/i.test(o.title+' '+o.text)}).map(function(o){return '<a class="deal" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
-  document.getElementById('newin').innerHTML=d.newArrivals.map(function(p){return '<a class="prod" href="'+esc(p.link)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy"><div class="n">'+esc(p.name)+'</div><div class="p">$'+(+p.price).toFixed(2).replace(/\.00$/,'')+'</div></a>'}).join('');
+  document.getElementById('newin').innerHTML=d.newArrivals.map(function(p){return '<a class="prod" href="'+esc(p.link)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy">'+(p.badge?'<span class="bdg">'+esc(p.badge)+'</span>':'')+'<div class="n">'+esc(p.name)+'</div><div class="p">$'+(+p.price).toFixed(2).replace(/\.00$/,'')+'</div></a>'}).join('');
 }).catch(function(){});
 
 /* ---------- qibla ---------- */
