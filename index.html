@@ -379,6 +379,7 @@ renderPrayer();setInterval(renderPrayer,30000);
 fetch('data.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
   document.getElementById('offers').innerHTML=d.offers.map(function(o){return '<a class="offer" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div class="t"><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
   var dl=document.getElementById('deals');if(dl)dl.innerHTML=d.offers.filter(function(o){return !/WELCOME5/i.test(o.title+' '+o.text)}).map(function(o){return '<a class="deal" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
+  var ct=document.querySelector('#v-shop .cats');if(ct&&d.categories&&d.categories.length>=6)ct.innerHTML=d.categories.map(function(c){return '<a class="cat" href="'+esc(c.link)+'"><img src="'+esc(c.img)+'" alt="" loading="lazy"><span>'+esc(c.name)+'</span></a>'}).join('');
   document.getElementById('newin').innerHTML=d.newArrivals.map(function(p){return '<a class="prod" href="'+esc(p.link)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy">'+(p.badge?'<span class="bdg">'+esc(p.badge)+'</span>':'')+'<div class="n">'+esc(p.name)+'</div><div class="p">$'+(+p.price).toFixed(2).replace(/\.00$/,'')+'</div></a>'}).join('');
 }).catch(function(){});
 
