@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PGCC Islamic Store</title>
+<meta name="description" content="PGCC Islamic Store app: offers, new arrivals, prayer times for Doveton, Qibla and daily duas.">
+<meta name="theme-color" content="#0F3D2E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PGCC Store">
+<link rel="manifest" href="manifest.webmanifest">
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(OneSignal){await OneSignal.init({appId:"0082ccbb-94d3-46de-8095-ad06738e8470"});});</script>
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<style>
+:root{--g:#0F3D2E;--g2:#174f3c;--gold:#D4AF37;--gold2:#8A6D1F;--bg:#F4F1EA;--card:#fff;--tx:#1F2937;--mut:#6B7280}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+header{background:var(--g);color:#fff;padding:calc(env(safe-area-inset-top) + 14px) 16px 18px;display:flex;align-items:center;gap:12px}
+header img{width:46px;height:46px;border-radius:50%}
+header .h1{font-family:Georgia,"Times New Roman",serif;font-size:19px;color:var(--gold);letter-spacing:.5px}
+header .sub{font-size:12.5px;opacity:.85;margin-top:2px}
+main{padding:14px 14px calc(84px + env(safe-area-inset-bottom));max-width:640px;margin:0 auto}
+.view{display:none}.view.on{display:block}
+.card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+h2{font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:var(--g);font-size:20px;margin:6px 2px 10px}
+.kick{font-size:11.5px;letter-spacing:2px;color:var(--gold2);font-weight:bold;text-transform:uppercase}
+.next{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff}
+.next .name{font-family:Georgia,serif;font-size:26px;color:var(--gold);margin:4px 0}
+.next .cd{font-size:15px;opacity:.95}
+.next .hijri{font-size:13px;opacity:.8;margin-top:8px}
+.btn{display:inline-block;background:var(--gold);color:var(--g);font-weight:bold;border-radius:22px;padding:10px 18px;text-decoration:none;border:0;font-size:14px;cursor:pointer}
+.btn.g{background:var(--g);color:#fff}.btn.wa{background:#128C7E;color:#fff}
+.offers{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin:0 -14px;padding-left:14px;padding-right:14px}
+.offer{flex:0 0 82%;scroll-snap-align:start;background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex}
+.offer img{width:38%;object-fit:contain;background:#fff;padding:8px}
+.offer .t{padding:14px 12px 14px 4px}.offer b{display:block;font-family:Georgia,serif;font-weight:normal;color:var(--g);font-size:17px;margin:4px 0}
+.offer span{font-size:13px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prod{background:#fff;border-radius:12px;padding:10px;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.prod img{width:100%;aspect-ratio:1;object-fit:contain;border-radius:8px;background:#fff}
+.prod .n{font-size:13px;line-height:1.3;margin:6px 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px}
+.prod .p{font-weight:bold;color:var(--gold2);font-size:14px}
+.prod{position:relative}.prod .bdg{position:absolute;top:8px;left:8px;background:var(--g);color:var(--gold);font-size:11px;font-weight:bold;border-radius:10px;padding:3px 8px}
+table.pt{width:100%;border-collapse:collapse;font-size:16px}
+table.pt td{padding:12px 6px;border-bottom:1px solid #EEE}
+table.pt td:last-child{text-align:right;font-weight:bold;font-variant-numeric:tabular-nums}
+table.pt tr.now td{color:var(--g);background:#FBF6E5}
+.note{font-size:12px;color:var(--mut);margin-top:10px}
+.compass{position:relative;width:260px;height:260px;margin:10px auto 16px;border-radius:50%;background:radial-gradient(circle,#fff 58%,#F4F1EA 59%);border:6px solid var(--g)}
+.compass .dial{position:absolute;inset:0;transition:transform .25s}
+.compass .m{position:absolute;left:50%;top:6px;transform:translateX(-50%);font-weight:bold;color:var(--g);font-size:13px}
+.compass .needle{position:absolute;left:50%;top:50%;width:6px;height:112px;margin-left:-3px;margin-top:-112px;background:linear-gradient(var(--gold),var(--gold2));border-radius:3px;transform-origin:50% 100%}
+.compass .kaaba{position:absolute;left:50%;top:22px;transform:translateX(-50%);width:26px;height:26px;background:#111;border-top:5px solid var(--gold);border-radius:3px}
+.compass .dot{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px;background:var(--g);border-radius:50%}
+.dua{border-left:4px solid var(--gold)}
+.dua .ar{font-family:"Amiri","Scheherazade New","Traditional Arabic",serif;font-size:24px;line-height:1.9;direction:rtl;text-align:right;color:var(--g);margin:8px 0}
+.dua .tr{font-style:italic;font-size:14px;color:#374151;margin-bottom:6px}
+.dua .en{font-size:14.5px;line-height:1.5}
+.dua .src{font-size:12px;color:var(--mut);margin-top:6px}
+.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F0F0F0;font-size:14.5px}
+.row.today{font-weight:bold;color:var(--g)}
+.social a{display:inline-block;margin:4px 10px 4px 0;color:var(--g);font-weight:bold;text-decoration:none;font-size:14px}
+nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #E5E7EB;display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}
+nav button{flex:1;background:none;border:0;padding:9px 0 8px;font-size:11px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+nav button svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--g);font-weight:bold}
+#notif{display:none}
+.search{display:flex;gap:8px;margin-bottom:14px}
+.search input{flex:1;border:1px solid #E5E7EB;border-radius:22px;padding:12px 16px;font-size:16px;background:#fff;outline:none}
+.search button{border:0;border-radius:22px;background:var(--g);color:#fff;padding:0 18px;font-weight:bold;font-size:14px}
+.daily .q{font-family:Georgia,serif;font-size:18px;line-height:1.5;color:var(--tx);margin:8px 0 6px}
+.daily .src{font-size:12.5px;color:var(--mut)}
+.fri{background:#FBF6E5;border:1px solid #EADBA6}
+.cdown{display:flex;gap:10px}
+.cdown div{flex:1;background:#fff;border-radius:12px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cdown b{display:block;font-family:Georgia,serif;font-size:28px;color:var(--g);font-weight:normal}
+.cdown span{font-size:12px;color:var(--mut)}
+.tasbih{text-align:center}
+.tasbih .count{font-family:Georgia,serif;font-size:64px;color:var(--g);line-height:1;margin:10px 0 4px}
+.tasbih .tap{width:170px;height:170px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#2a7a5c,var(--g));color:var(--gold);font-size:20px;font-weight:bold;margin:12px auto;display:block;box-shadow:0 6px 18px rgba(15,61,46,.35);touch-action:manipulation}
+.tasbih .tap:active{transform:scale(.97)}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.chips button{border:1px solid #D1D5DB;background:#fff;border-radius:18px;padding:7px 12px;font-size:13px}
+.chips button.on{background:var(--g);color:#fff;border-color:var(--g)}
+
+
+#ig{position:fixed;inset:0;z-index:9999;background:rgba(5,25,18,.985);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding:28px 22px 120px;overflow:auto;font-family:inherit}
+#ig.on{display:flex}#ig h2{font-family:Georgia,serif;color:var(--gold);font-size:24px;margin:8px 0 18px;text-align:center}
+#ig .st{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.45);border-radius:16px;padding:14px 16px;margin:7px 0;width:100%;max-width:380px;font-size:16px;line-height:1.35}
+#ig .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--g);font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:17px}
+#ig .ic{display:inline-flex;vertical-align:middle;background:#fff;color:#0a84ff;border-radius:7px;padding:2px 6px;margin:0 2px}
+#ig .x{position:absolute;top:14px;right:16px;background:none;border:0;color:#fff;font-size:30px}
+#ig .big{margin-top:16px}
+#ig .arrow{position:fixed;bottom:18px;font-size:46px;color:var(--gold);animation:bob 1s ease-in-out infinite;text-shadow:0 2px 8px #000}
+@keyframes bob{50%{transform:translateY(10px)}}
+
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 10px;margin-top:6px}
+.cat{text-decoration:none;color:var(--tx);text-align:center;font-size:13px;line-height:1.25}
+.cat img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;border:2px solid var(--gold);background:#fff;display:block;margin-bottom:6px}
+.bigbtn{display:block;text-align:center;background:var(--g);color:var(--gold);text-decoration:none;font-weight:bold;border-radius:14px;padding:15px;font-size:16px;margin:12px 0}
+.deal{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:10px;text-decoration:none;color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.08);margin:10px 0}
+.deal img{width:84px;height:84px;object-fit:contain;border-radius:10px;background:#fff}
+.deal b{display:block;font-family:Georgia,serif;font-weight:normal;color:var(--g);font-size:17px;margin:3px 0}.deal span{font-size:13px;color:var(--mut)}
+.code{border:2px dashed var(--gold);border-radius:14px;padding:14px;text-align:center;background:#fffaf0}
+.code .c{font-size:26px;font-weight:bold;letter-spacing:3px;color:var(--g);margin:6px 0}
+.morelist a,.morelist button{display:flex;align-items:center;gap:14px;width:100%;background:#fff;border:0;border-radius:14px;padding:16px;margin:10px 0;font-size:16px;color:var(--tx);text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:left;font-family:inherit;cursor:pointer}
+.morelist svg{width:24px;height:24px;stroke:var(--g);fill:none;stroke-width:1.8;flex:none}
+.scanbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--g);text-decoration:none;font-weight:bold;border-radius:14px;padding:14px;font-size:16px;margin:12px 0;border:0;width:100%;font-family:inherit;cursor:pointer}
+.scanbtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
+#scanbox{position:relative;background:#000;border-radius:16px;overflow:hidden;aspect-ratio:3/4;max-height:58vh;margin:10px 0}
+#scanbox video{width:100%;height:100%;object-fit:cover;display:block}
+#scanbox .aim{position:absolute;left:12%;right:12%;top:38%;height:24%;border:3px solid var(--gold);border-radius:12px;box-shadow:0 0 0 2000px rgba(0,0,0,.35)}
+#scanbox .msg{position:absolute;left:0;right:0;bottom:10px;text-align:center;color:#fff;font-size:14px}
+.sres{background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin:10px 0;text-align:center}
+.sres img{width:170px;height:170px;object-fit:contain}
+.sres .nm{font-family:Georgia,serif;color:var(--g);font-size:19px;margin:6px 0}
+.sres .pr{font-size:30px;font-weight:bold;color:var(--g)}
+.sres .was{text-decoration:line-through;color:var(--mut);font-size:18px;margin-right:8px;font-weight:normal}
+.sres .pill{display:inline-block;background:#1d7a3e;color:#fff;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:bold;margin:6px 4px 0}
+.srow{display:flex;gap:8px}.srow>*{flex:1}
+.mcode{display:flex;gap:8px;margin:10px 0}.mcode input{flex:1;padding:12px;border-radius:12px;border:1px solid #ddd;font-size:16px}.mcode button{border:0;border-radius:12px;background:var(--g);color:var(--gold);font-weight:bold;padding:0 16px;font-size:15px}
+</style>
+</head>
+<body>
+<header>
+  <img src="https://www.pgccislamicstore.com.au/uploads/b/4ae7d650-ceb4-11eb-9077-d1bc653220ff/icon_180x180_ios_ODg2OT.png?width=180" alt="PGCC Islamic Store logo">
+  <div><div class="h1">PGCC ISLAMIC STORE</div><div class="sub" id="greet">Assalamu alaikum</div></div>
+</header>
+
+<main>
+<!-- HOME -->
+<section class="view on" id="v-home">
+  <div class="card next">
+    <div class="kick" style="color:#E8D48A">Next prayer &middot; Doveton</div>
+    <div class="name" id="nx-name">&nbsp;</div>
+    <div class="cd" id="nx-cd">&nbsp;</div>
+    <div class="hijri" id="hijri"></div>
+  </div>
+
+
+  <form class="search" id="search" action="https://www.pgccislamicstore.com.au/s/search" method="get">
+    <input type="search" name="q" placeholder="Search Qurans, dates, perfumes..." aria-label="Search products">
+    <button type="submit">Search</button>
+  </form>
+  <button type="button" class="scanbtn" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> In the shop? Scan a barcode for the price</button>
+
+  <div class="card fri" id="friday" style="display:none">
+    <div class="kick">Blessed Friday</div>
+    <p style="margin:6px 0 10px;font-size:15px;line-height:1.5">Remember to read <b>Surah Al-Kahf</b> today and send salawat upon the Prophet &#xFDFA;.</p>
+    <a class="btn g" href="https://www.pgccislamicstore.com.au/s/search?q=kahf">Surah Al-Kahf books</a>
+  </div>
+
+  <div class="card" id="install" style="display:none;border:2px solid var(--gold);text-align:center">
+    <div class="kick">Get the app</div>
+    <p style="margin:6px 0 12px;font-size:15px" id="inst-txt">Put the PGCC Islamic Store app on your phone. It takes 10 seconds.</p>
+    <button class="btn g" id="inst-btn" type="button" style="font-size:16px;padding:13px 26px">Install app</button>
+  </div>
+
+<div id="ig" role="dialog" aria-label="How to install the app"><button class="x" type="button" aria-label="Close">&times;</button><h2 id="ig-h"></h2><div id="ig-b" style="width:100%;display:flex;flex-direction:column;align-items:center"></div><div class="arrow" id="ig-a" style="display:none">&#11015;</div></div>
+  <div class="card daily">
+    <div class="kick" id="dl-kind">Today's reminder</div>
+    <div class="q" id="dl-text"></div>
+    <div class="src" id="dl-src"></div>
+  </div>
+  <div class="card" id="share">
+    <div class="kick">Share the app</div>
+    <p style="margin:6px 0 10px;font-size:14.5px" id="share-txt">Know someone who would love prayer times, Qibla and our offers? Send them the free app.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn g" id="share-btn" type="button">Share app</button>
+      <a class="btn" id="share-wa" target="_blank" rel="noopener" style="background:#25D366;color:#fff;text-decoration:none">WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="card" id="notif">
+    <div class="kick">Stay updated</div>
+    <p style="margin:6px 0 12px;font-size:14.5px">Get a notification for new offers, and for Ramadan, Eid and Hajj reminders.</p>
+    <button class="btn g" id="notif-btn" type="button">Turn on notifications</button>
+  </div>
+
+  <h2>Current offers</h2>
+  <div class="offers" id="offers"></div>
+
+
+  <h2 style="margin-top:18px" id="cd-title">Ramadan countdown</h2>
+  <div class="cdown" id="cdown"></div>
+  <p class="note" id="cd-note" style="margin:8px 2px 0"></p>
+  <p style="margin:12px 0 0"><a class="btn" id="cd-btn" href="https://www.pgccislamicstore.com.au/">Get ready for Ramadan</a></p>
+  <h2 style="margin-top:18px">New arrivals</h2>
+  <div class="grid" id="newin"></div>
+  <p style="text-align:center;margin:18px 0 6px"><a class="btn g" href="https://www.pgccislamicstore.com.au/s/shop">Shop all products</a></p>
+</section>
+
+<!-- PRAYER -->
+<section class="view" id="v-prayer">
+  <h2>Prayer times</h2>
+  <div class="card">
+    <div class="kick" id="pt-date"></div>
+    <table class="pt" id="pt"></table>
+    <div class="note" id="pt-note"></div>
+    <div class="row" style="margin-top:10px;border:0"><span><b>Jumu&#8217;ah</b></span><span>1:30 pm &amp; 2:45 pm</span></div>
+    <p style="margin:10px 0 0"><a class="btn g" href="https://pgcc.org.au/">Iqamah times on pgcc.org.au</a></p>
+  </div>
+</section>
+
+<!-- QIBLA -->
+<section class="view" id="v-qibla">
+  <h2>Qibla direction</h2>
+  <div class="card" style="text-align:center">
+    <div class="compass"><div class="dial" id="dial"><div class="m">N</div><div class="needle" id="needle"></div><div class="kaaba"></div></div><div class="dot"></div></div>
+    <div style="font-size:15px">The Qibla from Doveton is <b id="qdeg"></b> from true north.</div>
+    <p style="margin:14px 0 4px"><button class="btn g" id="cmp-btn" type="button">Use my phone's compass</button></p>
+    <div class="note" id="cmp-note">Hold your phone flat and away from metal. When the gold needle points straight up, you are facing the Qibla.</div>
+  </div>
+</section>
+
+<!-- DUAS -->
+<section class="view" id="v-duas">
+  <h2>Tasbih counter</h2>
+  <div class="card tasbih">
+    <div class="kick" id="tb-label">SubhanAllah</div>
+    <div class="count" id="tb-count">0</div>
+    <div class="note" id="tb-goal">of 33</div>
+    <button class="tap" id="tb-tap" type="button">Tap</button>
+    <div class="chips" id="tb-chips"></div>
+    <p style="margin:12px 0 0"><button class="btn g" id="tb-reset" type="button">Reset</button></p>
+  </div>
+  <h2 style="margin-top:18px">Daily duas</h2>
+  <div id="duas"></div>
+</section>
+
+<!-- VISIT -->
+<section class="view" id="v-visit">
+  <h2>Visit us</h2>
+  <div class="card">
+    <div class="kick">PGCC Islamic Store</div>
+    <p style="margin:6px 0 2px;font-size:15px">9-11 Green Street, Doveton VIC 3177<br>(inside the Pillars of Guidance Community Centre)</p>
+    <p style="margin:12px 0"><a class="btn wa" href="https://wa.me/61402301235">Chat on WhatsApp</a> <a class="btn g" href="tel:+61402301235">Call us</a></p>
+    <p style="margin:0"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=PGCC+Islamic+Store+Doveton">Directions</a></p>
+  </div>
+  <div class="card">
+    <div class="kick" style="margin-bottom:6px">Opening hours</div>
+    <div id="hours"></div>
+  </div>
+  <div class="card">
+    <div class="kick">Shop online</div>
+    <p style="margin:6px 0 10px;font-size:14.5px">Australia-wide shipping, free over $250. Free Click &amp; Collect from Doveton.</p>
+    <a class="btn g" href="https://www.pgccislamicstore.com.au/">Open the online store</a>
+    <div class="social" style="margin-top:14px">
+      <a href="https://www.instagram.com/pgccislamicstore">Instagram</a><a href="https://www.facebook.com/pgccislamicstore">Facebook</a><a href="https://www.tiktok.com/@pgccislamicstore">TikTok</a><a href="https://www.youtube.com/channel/UCyeFEg8HjKfV61Gy4ARMPVg">YouTube</a>
+    </div>
+  </div>
+</section>
+<section class="view" id="v-shop">
+  <h2>Shop</h2>
+  <form class="search" action="https://www.pgccislamicstore.com.au/s/search" method="get"><input type="search" name="q" placeholder="Search Qurans, dates, perfumes..." aria-label="Search products"><button type="submit">Search</button></form>
+  <a class="bigbtn" href="https://www.pgccislamicstore.com.au/s/shop">Shop all products &rarr;</a>
+  <button type="button" class="scanbtn" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> Price scanner (in store)</button>
+  <div class="cats"><a class="cat" href="https://www.pgccislamicstore.com.au/shop/quran-and-tafseer/9"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/58981334391eaafc38011abc7de324d5e81a3d2c/original.jpeg" alt="" loading="lazy"><span>Qurans</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/islamic-books/3NHLSB4L6DEHP3XB5RAN6SHO"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/ed6093f3826fc9f0da6634de3a18dce4eae584cf/original.jpeg" alt="" loading="lazy"><span>Islamic Books</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/little-muslims/CHABZEQZOQACCDGRA5XUJAWL"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c291a33f492a37da0e41e61a290921afb92d952a/original.jpeg" alt="" loading="lazy"><span>Kids</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/maktab-curriculum-resources/OZ57JKKCGDLMAG4MM56BD4RY"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/f128a2aa52d398a604e4e702f5db90b9300c5fec/original.jpeg" alt="" loading="lazy"><span>Maktab</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/arabian-perfumes-attars/67"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/997ca7e45f413329aa78a4e653723aef0d28e38a/original.jpeg" alt="" loading="lazy"><span>Perfumes &amp; Attars</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/islamic-essentials/B2MPRI46OTLXXJOJO6PPJRV2"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/43e1977821dc689514f7b28fd0571f1916ac1523/original.jpeg" alt="" loading="lazy"><span>Prayer Essentials</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/womens-collection/VHAO2XF3QFWLYLDF4IO6CJPM"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c5b4ee206eb1e5d0b86d8e2c9ee037d31a19c915/original.jpeg" alt="" loading="lazy"><span>Women</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/mens-collection/EIF4JFADRWD2D4JPHUFMBA3P"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c4322ca9419b7400402f5a26321951a9758bc7fa/original.jpeg" alt="" loading="lazy"><span>Men</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/dates/64"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/202d2061bb048689f378822a1ffa2e2bb5ea689b/original.jpeg" alt="" loading="lazy"><span>Dates</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/zam-zam-water/29"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/f780c5ffd6ba4bd9b3ebbb172e4864e728ba4391/original.jpeg" alt="" loading="lazy"><span>Zam Zam Water</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/food-health/F4GUBJNFNBDKCZCQ2GUBV7SN"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/a86b4711406beebc000d371f4315b548948c45de/original.jpeg" alt="" loading="lazy"><span>Food &amp; Health</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/home-lifestyle/AEOOBQV2PA4TOE5ZUNTX4RDX"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/1a19ee8ccfe0244a085bfda529e6ca757d8a0cea/original.jpeg" alt="" loading="lazy"><span>Home &amp; Living</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/hajj-umrah/97"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/d40785be487602e76b5408613f8af048b5101b86/original.jpeg" alt="" loading="lazy"><span>Hajj &amp; Umrah</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/ramadan-eid/5IIHGBEAZSCGPVLH4H6AAX7P"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/5e71587fe743efd93fbbfe42df2074ae3a1ce45d/original.jpeg" alt="" loading="lazy"><span>Ramadan &amp; Eid</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/online-only/TOJY7FNKLPLC7II2DHR6VNDP"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/01b0d97daa105954bda4c2b770effc9c3cf2d090/original.png" alt="" loading="lazy"><span>Online Only</span></a></div>
+  <p style="text-align:center;font-size:13px;color:var(--mut);margin-top:18px">Free shipping Australia-wide over $250 &middot; Free click &amp; collect in Doveton &middot; Afterpay</p>
+</section>
+
+<section class="view" id="v-deals">
+  <h2>Deals &amp; offers</h2>
+  <a class="bigbtn" href="https://www.pgccislamicstore.com.au/shop/barakah-deals/G6Z7PSYIRN7Y6YSCKJDI4VBO">See all Barakah Deals &rarr;</a>
+  <div id="deals"></div>
+  <div class="code"><div class="kick">Welcome offer</div><div class="c">WELCOME5</div><div style="font-size:14px">5% off your first online order. Enter the code at checkout.</div></div>
+  <a class="deal" href="https://www.pgccislamicstore.com.au/shop/online-only/TOJY7FNKLPLC7II2DHR6VNDP"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/01b0d97daa105954bda4c2b770effc9c3cf2d090/original.png" alt="" loading="lazy"><div><div class="kick">Online only</div><b>Shop online-only items</b><span>Shipping or pickup in Doveton</span></div></a>
+</section>
+
+<section class="view" id="v-more">
+  <h2>More</h2>
+  <div class="morelist">
+    <button type="button" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg>Price scanner</button>
+    <button type="button" data-go="qibla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>Qibla direction</button>
+    <button type="button" data-go="duas"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></svg>Tasbih, dhikr &amp; duas</button>
+    <button type="button" data-go="visit"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Visit us, opening hours &amp; contact</button>
+    <a href="https://www.pgccislamicstore.com.au/s/order"><svg viewBox="0 0 24 24"><path d="M6 6h15l-2 8H8z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M6 6L5 3H2"/></svg>My cart</a>
+    <a href="https://wa.me/61402301235"><svg viewBox="0 0 24 24"><path d="M4 20l1.5-4A8 8 0 1 1 9 19.5z"/></svg>WhatsApp us</a>
+  </div>
+</section>
+
+<section class="view" id="v-scan">
+  <h2>Price scanner</h2>
+  <p style="color:var(--mut);font-size:14px;margin-top:-4px">Point your camera at the barcode or the price sticker on any product in our shop.</p>
+  <div id="scanbox" style="display:none"><video id="scanvid" playsinline muted></video><div class="aim"></div><div class="msg" id="scanmsg">Looking for a barcode...</div></div>
+  <div id="scanres"></div>
+  <div class="srow"><button type="button" class="scanbtn" id="scanstart"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> Scan</button><button type="button" class="scanbtn" id="scanphoto" style="background:var(--g);color:var(--gold)"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Take photo</button></div>
+  <input type="file" id="scanfile" accept="image/*" capture="environment" style="display:none">
+  <form class="mcode" id="scancode"><input inputmode="text" placeholder="Or type the number under the barcode" aria-label="Barcode number"><button type="submit">Find</button></form>
+  <p style="text-align:center;font-size:12.5px;color:var(--mut)" id="scanupd"></p>
+</section>
+
+</main>
+
+<nav>
+  <button class="on" data-v="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</button>
+  <button data-v="shop"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Shop</button>
+  <button data-v="deals"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.5"/></svg>Deals</button>
+  <button data-v="prayer"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Prayer</button>
+  <button data-v="more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>More</button>
+</nav>
+
+<script>
+var TZ='Australia/Melbourne', LAT=-37.998775, LNG=145.233353;
+var NAMES=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+
+/* ---------- navigation ---------- */
+function show(v){document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});
+  var nv=({qibla:1,duas:1,visit:1,scan:1})[v]?'more':v;if(v!=='scan'&&window.scanStop)scanStop();document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
+  try{history.replaceState(null,'','#'+v)}catch(e){}}
+document.querySelectorAll('nav button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v)})});
+document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
+function fromHash(){var h=location.hash.slice(1);if(h&&document.getElementById('v-'+h))show(h)}fromHash();window.addEventListener('hashchange',fromHash);
+
+/* ---------- helpers ---------- */
+function fmt(d){return d.toLocaleTimeString('en-AU',{timeZone:TZ,hour:'numeric',minute:'2-digit'}).replace(' ',' ')}
+function melDate(d){var p=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(d);return p} // YYYY-MM-DD
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* ---------- prayer times ---------- */
+/* Uses the PGCC masjid timetable (timetable.json: {"YYYY-MM-DD":["05:01","06:30",...]} ) when present,
+   otherwise calculates (Muslim World League 18/17, standard Asr). */
+var D2R=Math.PI/180;
+function calc(dateStr){
+  var y=+dateStr.slice(0,4),m=+dateStr.slice(5,7),dd=+dateStr.slice(8,10);
+  var jd=Date.UTC(y,m-1,dd,12)/864e5+2440587.5, D=jd-2451545;
+  var g=(357.529+0.98560028*D)*D2R, q=280.459+0.98564736*D, L=(q+1.915*Math.sin(g)+0.020*Math.sin(2*g))*D2R;
+  var e=(23.439-0.00000036*D)*D2R, RA=Math.atan2(Math.cos(e)*Math.sin(L),Math.cos(L))/D2R/15;
+  var dec=Math.asin(Math.sin(e)*Math.sin(L)), eqt=q/15-((RA%24)+24)%24; eqt=((eqt+12)%24+24)%24-12;
+  var lat=LAT*D2R, noon=12-LNG/15-eqt;
+  function T(a){return Math.acos((-Math.sin(a*D2R)-Math.sin(dec)*Math.sin(lat))/(Math.cos(dec)*Math.cos(lat)))/D2R/15}
+  var asrA=-Math.atan(1/(2+Math.tan(Math.abs(lat-dec))))/D2R; /* Hanafi Asr, as PGCC */
+  var h=[noon-T(18)+1/60,noon-T(0.833),noon,noon+T(asrA),noon+T(0.833)+1/60,noon+T(17)];
+  return h.map(function(x){return new Date(Date.UTC(y,m-1,dd)+Math.round(x*60)*60e3)});
+}
+var TT=null;
+function fromTT(dateStr){
+  if(!TT||!TT[dateStr])return null;
+  var base=new Date(dateStr+'T12:00:00Z'), off=offsetMin(base);
+  return TT[dateStr].map(function(t){var p=t.split(':');return new Date(Date.parse(dateStr+'T00:00:00Z')+((+p[0])*60+(+p[1])-off)*60e3)});
+}
+function offsetMin(d){var s=d.toLocaleString('en-US',{timeZone:TZ,timeZoneName:'shortOffset'});var m=s.match(/GMT([+-]\d+)(?::(\d+))?/);return m?(+m[1])*60+(m[1][0]==='-'?-1:1)*(+(m[2]||0)):600}
+function times(dateStr){return fromTT(dateStr)||calc(dateStr)}
+function addDays(dateStr,n){var d=new Date(dateStr+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)}
+
+function renderPrayer(){
+  var now=new Date(), today=melDate(now), t=times(today), nxt=-1;
+  for(var i=0;i<6;i++){if(i!==1&&t[i]>now){nxt=i;break}}
+  var name,at;
+  if(nxt<0){var tm=times(addDays(today,1));name='Fajr';at=tm[0]}else{name=NAMES[nxt];at=t[nxt]}
+  var mins=Math.max(0,Math.round((at-now)/6e4)), hh=Math.floor(mins/60), mm=mins%60;
+  document.getElementById('nx-name').textContent=name+' · '+fmt(at);
+  document.getElementById('nx-cd').textContent=mins<1?'Starting now':'in '+(hh?hh+' hr ':'')+mm+' min';
+  var rows='';
+  for(var j=0;j<6;j++){rows+='<tr'+(j===nxt?' class="now"':'')+'><td>'+NAMES[j]+'</td><td>'+fmt(t[j])+'</td></tr>'}
+  document.getElementById('pt').innerHTML=rows;
+  document.getElementById('pt-date').textContent=now.toLocaleDateString('en-AU',{timeZone:TZ,weekday:'long',day:'numeric',month:'long'})+' · Doveton';
+  document.getElementById('pt-note').textContent=fromTT(today)?'Times from the PGCC masjid timetable.':'Adhan times as on the PGCC masjid timetable (MWL, Hanafi Asr).';
+  try{document.getElementById('hijri').textContent=new Intl.DateTimeFormat('en-GB-u-ca-islamic-umalqura',{timeZone:TZ,day:'numeric',month:'long',year:'numeric'}).format(now)}catch(e){}
+}
+fetch('timetable.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(j){TT=j;renderPrayer()}).catch(function(){});
+renderPrayer();setInterval(renderPrayer,30000);
+(function(){var h=+new Intl.DateTimeFormat('en-AU',{timeZone:TZ,hour:'numeric',hourCycle:'h23'}).format(new Date());
+  document.getElementById('greet').textContent='Assalamu alaikum · '+(h<12?'Good morning':h<18?'Good afternoon':'Good evening')})();
+
+/* ---------- offers + new arrivals (data.json) ---------- */
+fetch('data-new.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
+  document.getElementById('offers').innerHTML=d.offers.map(function(o){return '<a class="offer" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div class="t"><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
+  var dl=document.getElementById('deals');if(dl)dl.innerHTML=d.offers.filter(function(o){return !/WELCOME5/i.test(o.title+' '+o.text)}).map(function(o){return '<a class="deal" href="'+esc(o.link)+'"><img src="'+esc(o.img)+'" alt="" loading="lazy"><div><div class="kick">'+esc(o.tag)+'</div><b>'+esc(o.title)+'</b><span>'+esc(o.text)+'</span></div></a>'}).join('');
+  document.getElementById('newin').innerHTML=d.newArrivals.map(function(p){return '<a class="prod" href="'+esc(p.link)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy">'+(p.badge?'<span class="bdg">'+esc(p.badge)+'</span>':'')+'<div class="n">'+esc(p.name)+'</div><div class="p">$'+(+p.price).toFixed(2).replace(/\.00$/,'')+'</div></a>'}).join('');
+}).catch(function(){});
+
+/* ---------- qibla ---------- */
+var QIBLA=(function(){var k1=21.4225*D2R,k2=39.8262*D2R,a=LAT*D2R,b=LNG*D2R;
+  var x=Math.sin(k2-b),y=Math.cos(a)*Math.tan(k1)-Math.sin(a)*Math.cos(k2-b);return (Math.atan2(x,y)/D2R+360)%360})();
+document.getElementById('qdeg').textContent=Math.round(QIBLA)+'°';
+document.getElementById('needle').style.transform='rotate('+QIBLA+'deg)';
+document.querySelector('.kaaba').style.transform='translateX(-50%)';
+(function(){var k=document.querySelector('.kaaba'),r=101;k.style.left='calc(50% + '+(Math.sin(QIBLA*D2R)*r)+'px)';k.style.top='calc(50% - '+(Math.cos(QIBLA*D2R)*r)+'px - 13px)';})();
+function onOri(e){var hd=e.webkitCompassHeading!=null?e.webkitCompassHeading:(e.absolute&&e.alpha!=null?360-e.alpha:null);if(hd==null)return;
+  document.getElementById('dial').style.transform='rotate('+(-hd)+'deg)';
+  var diff=Math.abs(((QIBLA-hd)+540)%360-180);document.getElementById('cmp-note').textContent=diff<5?'You are facing the Qibla.':'Turn slowly until the gold needle points straight up.'}
+document.getElementById('cmp-btn').addEventListener('click',function(){
+  function start(){window.addEventListener('deviceorientationabsolute',onOri,true);window.addEventListener('deviceorientation',onOri,true);this&&(document.getElementById('cmp-btn').style.display='none')}
+  if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function'){DeviceOrientationEvent.requestPermission().then(function(s){if(s==='granted')start();else document.getElementById('cmp-note').textContent='Compass permission was not given. Use the degrees shown above.'}).catch(function(){})}
+  else start();
+});
+
+/* ---------- duas ---------- */
+var DUAS=[
+ ['Leaving the house','بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ','Bismillah, tawakkaltu ʿala Allah, wa la hawla wa la quwwata illa billah','In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.','Abu Dawud 5095, Tirmidhi 3426'],
+ ['Entering the masjid','اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ','Allahumma-ftah li abwaba rahmatik','O Allah, open for me the doors of Your mercy.','Sahih Muslim 713'],
+ ['Travelling (car, plane)','سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ','Subhanal-ladhi sakhkhara lana hadha wa ma kunna lahu muqrinin, wa inna ila Rabbina lamunqalibun','Glory be to the One who has subjected this to us, and we could not have done it ourselves. And to our Lord we will surely return.','Quran 43:13-14, Sahih Muslim 1342'],
+ ['After eating','الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا، وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ','Alhamdu lillahil-ladhi atʿamani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah','All praise is for Allah who fed me this and provided it for me without any might or power from me.','Abu Dawud 4023, Tirmidhi 3458'],
+ ['For your parents','رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا','Rabbir-hamhuma kama rabbayani saghira','My Lord, have mercy on them both as they raised me when I was small.','Quran 17:24'],
+ ['Good in this life and the next','رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ','Rabbana atina fid-dunya hasanah, wa fil-akhirati hasanah, wa qina ʿadhaban-nar','Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.','Quran 2:201'],
+ ['Before sleeping','بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا','Bismika Allahumma amutu wa ahya','In Your name, O Allah, I die and I live.','Sahih al-Bukhari 6324'],
+ ['Sayyid al-Istighfar (best way to seek forgiveness)','اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ','Allahumma anta Rabbi, la ilaha illa ant, khalaqtani wa ana ʿabduk, wa ana ʿala ʿahdika wa waʿdika mastataʿt, aʿudhu bika min sharri ma sanaʿt, abu’u laka biniʿmatika ʿalayya, wa abu’u laka bidhanbi faghfir li, fa innahu la yaghfirudh-dhunuba illa ant','O Allah, You are my Lord, there is no god but You. You created me and I am Your servant, and I keep Your covenant and promise as best I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favour upon me and I acknowledge my sin, so forgive me, for none forgives sins except You.','Sahih al-Bukhari 6306']
+];
+document.getElementById('duas').innerHTML=DUAS.map(function(d){return '<div class="card dua"><div class="kick">'+d[0]+'</div><div class="ar" lang="ar">'+d[1]+'</div><div class="tr">'+d[2]+'</div><div class="en">'+d[3]+'</div><div class="src">'+d[4]+'</div></div>'}).join('');
+
+/* ---------- opening hours ---------- */
+var HRS=[['Sunday','3:30 pm – 9:30 pm'],['Monday','4:00 pm – 9:30 pm'],['Tuesday','4:00 pm – 9:30 pm'],['Wednesday','4:30 pm – 8:30 pm'],['Thursday','4:00 pm – 9:30 pm'],['Friday','12:00 pm – 9:30 pm'],['Saturday','3:30 pm – 9:30 pm']];
+var dow=new Date().toLocaleDateString('en-AU',{timeZone:TZ,weekday:'long'});
+document.getElementById('hours').innerHTML=HRS.map(function(h){return '<div class="row'+(h[0]===dow?' today':'')+'"><span>'+h[0]+'</span><span>'+h[1]+'</span></div>'}).join('');
+
+
+/* ---------- reminder of the day ---------- */
+var DAILY=[
+ ['Quran','Allah does not burden a soul beyond what it can bear.','Surah Al-Baqarah 2:286'],
+ ['Hadith','Actions are judged only by intentions.','Sahih al-Bukhari 1, Sahih Muslim 1907'],
+ ['Quran','So surely with hardship comes ease. Surely with hardship comes ease.','Surah Ash-Sharh 94:5-6'],
+ ['Hadith','None of you truly believes until he loves for his brother what he loves for himself.','Sahih al-Bukhari 13, Sahih Muslim 45'],
+ ['Quran','So remember Me; I will remember you.','Surah Al-Baqarah 2:152'],
+ ['Hadith','The most beloved deeds to Allah are those done consistently, even if they are small.','Sahih al-Bukhari 6464, Sahih Muslim 783'],
+ ['Quran','Surely in the remembrance of Allah do hearts find rest.','Surah Ar-Ra’d 13:28'],
+ ['Hadith','Your smile in the face of your brother is charity.','Jami’ at-Tirmidhi 1956'],
+ ['Quran','And whoever relies upon Allah, He is sufficient for him.','Surah At-Talaq 65:3'],
+ ['Hadith','Whoever believes in Allah and the Last Day, let him speak good or remain silent.','Sahih al-Bukhari 6018, Sahih Muslim 47'],
+ ['Quran','Do not despair of the mercy of Allah.','Surah Az-Zumar 39:53'],
+ ['Hadith','The strong person is not the one who overpowers others, but the one who controls himself when angry.','Sahih al-Bukhari 6114, Sahih Muslim 2609'],
+ ['Quran','I am near. I respond to the call of the one who calls upon Me.','Surah Al-Baqarah 2:186'],
+ ['Hadith','Make things easy and do not make them difficult.','Sahih al-Bukhari 69'],
+ ['Quran','The most noble of you in the sight of Allah is the most righteous of you.','Surah Al-Hujurat 49:13'],
+ ['Hadith','Charity does not decrease wealth.','Sahih Muslim 2588'],
+ ['Quran','My Lord, increase me in knowledge.','Surah Ta-Ha 20:114'],
+ ['Hadith','The best of you are those who learn the Quran and teach it.','Sahih al-Bukhari 5027'],
+ ['Quran','And your Lord has decreed that you worship none but Him, and be good to your parents.','Surah Al-Isra 17:23'],
+ ['Hadith','Give gifts to one another and you will love one another.','Al-Adab al-Mufrad 594'],
+ ['Hadith','Allah is Beautiful and He loves beauty.','Sahih Muslim 91']
+];
+(function(){var d=melDate(new Date()),n=Math.floor(Date.parse(d+'T00:00:00Z')/864e5),it=DAILY[n%DAILY.length];
+ document.getElementById('dl-kind').textContent=(it[0]==='Quran'?'Ayah':'Hadith')+' of the day';
+ document.getElementById('dl-text').textContent='“'+it[1]+'”';document.getElementById('dl-src').textContent=it[2];
+ if(new Date().toLocaleDateString('en-AU',{timeZone:TZ,weekday:'long'})==='Friday')document.getElementById('friday').style.display='block';})();
+
+/* ---------- Ramadan / Eid countdown (Umm al-Qura calendar, expected dates) ---------- */
+(function(){
+ var f;try{f=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{timeZone:TZ,day:'numeric',month:'numeric'})}catch(e){return}
+ function hm(d){var p=f.formatToParts(d),o={};p.forEach(function(x){o[x.type]=x.value});return [+o.month,+o.day]}
+ var now=new Date(), targets=[[9,1,'Ramadan','Get ready for Ramadan','https://www.pgccislamicstore.com.au/s/search?q=ramadan'],[10,1,'Eid al-Fitr','Eid gifts','https://www.pgccislamicstore.com.au/s/search?q=eid'],[12,10,'Eid al-Adha','Eid gifts','https://www.pgccislamicstore.com.au/s/search?q=eid']];
+ var cur=hm(now), inRamadan=cur[0]===9;
+ var best=null;
+ for(var i=0;i<400&&!best;i++){var d=new Date(now.getTime()+i*864e5),h=hm(d);for(var t=0;t<targets.length;t++){if(h[0]===targets[t][0]&&h[1]===targets[t][1]&&!(inRamadan&&t===0)){best=[i,targets[t]];break}}}
+ if(!best)return;
+ var days=best[0],t=best[1];
+ document.getElementById('cd-title').textContent=t[2]+' countdown';
+ document.getElementById('cdown').innerHTML='<div><b>'+days+'</b><span>days</span></div><div><b>'+Math.floor(days/7)+'</b><span>weeks</span></div><div><b>'+new Date(now.getTime()+days*864e5).toLocaleDateString('en-AU',{timeZone:TZ,day:'numeric',month:'short'})+'</b><span>expected</span></div>';
+ document.getElementById('cd-note').textContent='Expected date, subject to moon sighting.';
+ var b=document.getElementById('cd-btn');b.textContent=t[3];b.href=t[4];
+})();
+
+/* ---------- tasbih counter ---------- */
+(function(){
+ var DH=[['SubhanAllah',33],['Alhamdulillah',33],['Allahu Akbar',34],['La ilaha illa Allah',100],['Astaghfirullah',100],['Salawat',100]];
+ var st={i:0,c:0};try{st=JSON.parse(localStorage.getItem('pgcc_tasbih'))||st}catch(e){}
+ var lab=document.getElementById('tb-label'),cnt=document.getElementById('tb-count'),goal=document.getElementById('tb-goal'),ch=document.getElementById('tb-chips');
+ function save(){try{localStorage.setItem('pgcc_tasbih',JSON.stringify(st))}catch(e){}}
+ function draw(){var d=DH[st.i];lab.textContent=d[0];cnt.textContent=st.c;goal.textContent=st.c>=d[1]?'Completed '+d[1]+' ✓':'of '+d[1];
+  ch.innerHTML=DH.map(function(x,k){return '<button type="button" data-k="'+k+'"'+(k===st.i?' class="on"':'')+'>'+x[0]+'</button>'}).join('')}
+ ch.addEventListener('click',function(e){var k=e.target.getAttribute('data-k');if(k==null)return;st={i:+k,c:0};save();draw()});
+ document.getElementById('tb-tap').addEventListener('click',function(){st.c++;if(navigator.vibrate)navigator.vibrate(st.c===DH[st.i][1]?[60,60,60]:15);save();draw()});
+ document.getElementById('tb-reset').addEventListener('click',function(){st.c=0;save();draw()});
+ draw();
+})();
+
+/* ---------- add to home screen (easy install) ---------- */
+(function(){
+ var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isAnd=/Android/i.test(ua);
+ var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+ if(standalone||!(isIOS||isAnd||/Mobi/i.test(ua)))return;
+ var inApp=/Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger|WhatsApp|TikTok|musical_ly|Bytedance|Snapchat|Line\/|GSA\//i.test(ua);
+ var iosChrome=/CriOS|EdgiOS|FxiOS/.test(ua);
+ var URL_='https://app.pgccislamicstore.com.au/?src=install';
+ var card=document.getElementById('install'),btn=document.getElementById('inst-btn'),txt=document.getElementById('inst-txt');
+ var ov=document.getElementById('ig'),H=document.getElementById('ig-h'),B=document.getElementById('ig-b'),A=document.getElementById('ig-a'),dp=null;
+ var SH='<span class="ic"><svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="#0a84ff" stroke-width="1.8"><path d="M8 11V1M4.5 4.5L8 1l3.5 3.5"/><path d="M4 7H2v10h12V7h-2"/></svg></span>';
+ var PLUS='<span class="ic" style="font-weight:bold">&#65291;</span>';
+ function st(n,h){return '<div class="st"><div class="n">'+n+'</div><div>'+h+'</div></div>';}
+ function open(h,body,arrow){H.innerHTML=h;B.innerHTML=body;A.style.display=arrow?'block':'none';ov.classList.add('on');}
+ ov.querySelector('.x').onclick=function(){ov.classList.remove('on');};
+ card.style.display='block';
+ if(inApp){
+  txt.innerHTML='You opened this inside another app. Open it in your phone\'s browser to install.';
+  btn.textContent=isIOS?'Open in Safari':'Open in Chrome';
+ }
+ window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;});
+ window.addEventListener('appinstalled',function(){card.style.display='none';ov.classList.remove('on');});
+ btn.addEventListener('click',function(){
+  if(inApp){
+   if(isAnd){location.href='intent://app.pgccislamicstore.com.au/?src=install#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(URL_)+';end';return;}
+   try{location.href='x-safari-'+URL_;}catch(e){}
+   setTimeout(function(){open('Open in Safari',
+    st(1,'Tap <b>&#8943;</b> or <b>&#8942;</b> at the top or bottom of this screen')+
+    st(2,'Choose <b>Open in browser</b> / <b>Open in Safari</b>')+
+    st(3,'Then tap <b>Install app</b> again')+
+    '<button class="btn g big" type="button" id="ig-copy">Copy app link</button>',false);
+    var c=document.getElementById('ig-copy');c.onclick=function(){(navigator.clipboard?navigator.clipboard.writeText(URL_):Promise.reject()).then(function(){c.textContent='Copied - paste it in Safari';},function(){c.textContent='app.pgccislamicstore.com.au';});};
+   },700);return;
+  }
+  if(dp){dp.prompt();dp.userChoice.then(function(){dp=null;});return;}
+  if(isIOS&&iosChrome){open('Install on iPhone',st(1,'Tap '+SH+' <b>Share</b> (top right, next to the address)')+st(2,'Tap <b>Add to Home Screen</b>')+st(3,'Tap <b>Add</b>. Done!'),false);return;}
+  if(isIOS){open('Install in 3 easy taps',
+    st(1,'Tap '+SH+' <b>Share</b> at the bottom of Safari<br><small style="opacity:.8">Newer iPhones: tap <b>&#8943;</b> first, then Share</small>')+
+    st(2,'Scroll down, tap '+PLUS+' <b>Add to Home Screen</b>')+
+    st(3,'Tap <b>Add</b>. The PGCC Store icon appears on your Home Screen')+
+    '<p style="max-width:380px;margin:12px 0 0;opacity:.85;text-align:center">Then open it from the icon and tap <b>Turn on notifications</b></p>',true);return;}
+  open('Install the app',st(1,'Tap <b>&#8942;</b> (top right of Chrome)')+st(2,'Tap <b>Install app</b> or <b>Add to Home screen</b>')+st(3,'Tap <b>Install</b>. Done!'),false);
+ });
+ if(isIOS&&!inApp&&!/pgcc_ig_seen/.test(document.cookie)){document.cookie='pgcc_ig_seen=1;max-age=2592000;path=/';}
+})();
+
+/* ---------- share the app ---------- */
+(function(){
+ var url='https://app.pgccislamicstore.com.au/?src=share';
+ var msg='Get the free PGCC Islamic Store app \u2013 prayer times, Qibla, tasbih and our latest offers:';
+ var full=msg+' '+url, t=document.getElementById('share-txt');
+ document.getElementById('share-wa').href='https://wa.me/?text='+encodeURIComponent(full);
+ document.getElementById('share-btn').addEventListener('click',function(){
+  if(navigator.share){navigator.share({title:'PGCC Islamic Store',text:msg,url:url}).catch(function(){});return;}
+  if(navigator.clipboard){navigator.clipboard.writeText(full).then(function(){t.textContent='Link copied \u2013 paste it into WhatsApp, Instagram or a message.';},function(){window.open('https://wa.me/?text='+encodeURIComponent(full),'_blank');});}
+  else window.open('https://wa.me/?text='+encodeURIComponent(full),'_blank');
+ });
+})();
+
+/* ---------- push notifications (OneSignal) ---------- */
+(function(){
+ var card=document.getElementById('notif'),btn=document.getElementById('notif-btn');
+ var ua=navigator.userAgent,isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+ function upd(){ if(!('Notification' in window)){ if(isIOS&&!standalone){card.style.display='block';btn.style.display='none';card.querySelector('p').textContent='To get notifications on iPhone, first add this app to your Home Screen (Share, then Add to Home Screen), then open it from the icon.';} return; }
+  card.style.display=Notification.permission==='granted'?'none':'block';
+  if(Notification.permission==='denied'){btn.style.display='none';card.querySelector('p').textContent='Notifications are blocked. You can turn them on in your phone settings for this app.';} }
+ upd();
+ btn.addEventListener('click',function(){window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(OS){try{await OS.Notifications.requestPermission()}catch(e){}upd()})});
+})();
+</script>
+<script>
+/* ---------- in-store price scanner (prices.json, rebuilt nightly from Square) ---------- */
+(function(){
+var P=null,stream=null,timer=null,det=null,zx=null,busy=false,last='';
+var box=document.getElementById('scanbox'),vid=document.getElementById('scanvid'),msg=document.getElementById('scanmsg'),res=document.getElementById('scanres');
+function e(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function m(c){var s=(c/100).toFixed(2);return '$'+s.replace(/\.00$/,'')}
+function load(){if(P)return Promise.resolve(P);return fetch('prices.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){P=d;if(d.updated)document.getElementById('scanupd').textContent='Prices updated '+d.updated+'. Final price at the counter.';return d})}
+function zxing(){if(zx)return Promise.resolve(zx);return new Promise(function(ok,no){var t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';t.onload=function(){var Z=window.ZXing,h=new Map();h.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.EAN_13,Z.BarcodeFormat.EAN_8,Z.BarcodeFormat.UPC_A,Z.BarcodeFormat.UPC_E,Z.BarcodeFormat.CODE_128,Z.BarcodeFormat.CODE_39,Z.BarcodeFormat.QR_CODE]);h.set(Z.DecodeHintType.TRY_HARDER,true);zx=new Z.BrowserMultiFormatReader(h);ok(zx)};t.onerror=no;document.head.appendChild(t)})}
+function card(x){var img=x.i?(P.img+x.i):'';var pr=x.s!=null&&x.s<x.p?'<span class="was">'+m(x.p)+'</span>'+m(x.s):m(x.p);
+ return '<div class="sres">'+(img?'<img src="'+e(img)+'" alt="">':'')+'<div class="nm">'+e(x.n)+'</div><div class="pr">'+pr+'</div>'+(x.d?'<span class="pill">On sale: '+e(x.d)+'</span>':'')+(x.m?'<span class="pill" style="background:var(--gold2)">'+e(x.m)+'</span>':'')+(x.u?'<a class="bigbtn" style="margin-top:12px" href="'+e(P.url+x.u)+'">View or buy online</a>':'')+'</div>'}
+function find(code){code=String(code||'').trim().toUpperCase().replace(/\s/g,'');if(!code)return;return load().then(function(d){var x=d.items[code]||d.items[code.replace(/^0+/,'')]||(code.length===13&&code[0]==='0'?d.items[code.slice(1)]:null);
+ if(!x){res.innerHTML='<div class="sres"><div class="nm">Not found</div><p style="color:var(--mut)">We couldn\'t find '+e(code)+'. Please ask our staff at the counter.</p></div>';return false}
+ res.innerHTML=(Array.isArray(x)?x:[x]).map(card).join('');if(navigator.vibrate)navigator.vibrate(60);return true})}
+window.scanStop=function(){clearInterval(timer);timer=null;if(zx)try{zx.reset()}catch(_){}if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}box.style.display='none'};
+function hit(code){if(!code||code===last)return;last=code;scanStop();find(code)}
+function start(){res.innerHTML='';last='';load();box.style.display='block';msg.textContent='Looking for a barcode...';
+ if('BarcodeDetector' in window){navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){stream=s;vid.srcObject=s;vid.play();
+   det=det||new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128','code_39','qr_code']});
+   timer=setInterval(function(){if(busy||vid.readyState<2)return;busy=true;det.detect(vid).then(function(b){busy=false;if(b.length)hit(b[0].rawValue)}).catch(function(){busy=false})},250)}).catch(camErr);return}
+ zxing().then(function(r){r.decodeFromVideoDevice(null,vid,function(out){if(out)hit(out.getText())}).then(function(){stream=vid.srcObject}).catch(camErr)}).catch(camErr)}
+function camErr(){box.style.display='none';res.innerHTML='<div class="sres"><div class="nm">Camera not available</div><p style="color:var(--mut)">Allow camera access for this app, or tap <b>Take photo</b>, or type the number under the barcode.</p></div>'}
+function photo(f){if(!f)return;res.innerHTML='<div class="sres">Reading barcode...</div>';var u=URL.createObjectURL(f),im=new Image();im.onload=function(){
+ var tryZ=function(){zxing().then(function(r){return r.decodeFromImageElement(im)}).then(function(o){find(o.getText())}).catch(function(){res.innerHTML='<div class="sres"><div class="nm">No barcode found</div><p style="color:var(--mut)">Take the photo closer, with the whole barcode in the picture, or type the number below.</p></div>'})};
+ if('BarcodeDetector' in window){new BarcodeDetector().detect(im).then(function(b){b.length?find(b[0].rawValue):tryZ()}).catch(tryZ)}else tryZ()};im.src=u}
+document.getElementById('scanstart').addEventListener('click',start);
+document.getElementById('scanphoto').addEventListener('click',function(){scanStop();document.getElementById('scanfile').click()});
+document.getElementById('scanfile').addEventListener('change',function(){photo(this.files[0]);this.value=''});
+document.getElementById('scancode').addEventListener('submit',function(ev){ev.preventDefault();scanStop();find(this.querySelector('input').value)});
+})();
+</script>
+</body>
+</html>
