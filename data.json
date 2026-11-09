@@ -117,5 +117,87 @@
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/2c7b570c3570012ca80705756640feb2a3226a7c/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/allah-muhammad-car-hanging-ornament-white-red-stones/AX55J4KJL45WTVOONV4IRXES"
   }
+ ],
+ "categories": [
+  {
+   "name": "Quran & Tafseer",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/58981334391eaafc38011abc7de324d5e81a3d2c/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/quran-and-tafseer/2EBUMR5MLCDQRUI3WMKPJK7T"
+  },
+  {
+   "name": "Islamic Books",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/ed6093f3826fc9f0da6634de3a18dce4eae584cf/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/islamic-books/3NHLSB4L6DEHP3XB5RAN6SHO"
+  },
+  {
+   "name": "Kids",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/c291a33f492a37da0e41e61a290921afb92d952a/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/little-muslims/CHABZEQZOQACCDGRA5XUJAWL"
+  },
+  {
+   "name": "Maktab Curriculum",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/f128a2aa52d398a604e4e702f5db90b9300c5fec/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/maktab-curriculum-resources/OZ57JKKCGDLMAG4MM56BD4RY"
+  },
+  {
+   "name": "Perfumes & Attars",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/997ca7e45f413329aa78a4e653723aef0d28e38a/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/arabian-perfumes-attars/QK42J5IWZXUVIZ5OX5VTWYG7"
+  },
+  {
+   "name": "Prayer Essentials",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/43e1977821dc689514f7b28fd0571f1916ac1523/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/islamic-essentials/B2MPRI46OTLXXJOJO6PPJRV2"
+  },
+  {
+   "name": "Women",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/c5b4ee206eb1e5d0b86d8e2c9ee037d31a19c915/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/womens-collection/VHAO2XF3QFWLYLDF4IO6CJPM"
+  },
+  {
+   "name": "Hijabs & Scarves",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/57afaa9f08486522db6f96e82868fc8606df2cde/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/hijabs-scarfs/CAUXFZNU46JBAQVQ6ZI3ZPD2"
+  },
+  {
+   "name": "Men",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/c4322ca9419b7400402f5a26321951a9758bc7fa/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/mens-collection/EIF4JFADRWD2D4JPHUFMBA3P"
+  },
+  {
+   "name": "Dates",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/202d2061bb048689f378822a1ffa2e2bb5ea689b/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/dates/CMOQEBNOW5MBBT6IDTTRQIKY"
+  },
+  {
+   "name": "Zam Zam Water",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/f780c5ffd6ba4bd9b3ebbb172e4864e728ba4391/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/zam-zam-water/AFJK64SOZ66JO2IQDBUDLPOG"
+  },
+  {
+   "name": "Food & Health",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/a86b4711406beebc000d371f4315b548948c45de/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/food-health/F4GUBJNFNBDKCZCQ2GUBV7SN"
+  },
+  {
+   "name": "Home & Living",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/1a19ee8ccfe0244a085bfda529e6ca757d8a0cea/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/home-lifestyle/AEOOBQV2PA4TOE5ZUNTX4RDX"
+  },
+  {
+   "name": "Hajj & Umrah",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/d40785be487602e76b5408613f8af048b5101b86/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/hajj-umrah/6454UH6YOEVPLHNW4XK2XG64"
+  },
+  {
+   "name": "Ramadan & Eid",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/5e71587fe743efd93fbbfe42df2074ae3a1ce45d/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/shop/ramadan-eid/5IIHGBEAZSCGPVLH4H6AAX7P"
+  },
+  {
+   "name": "Online Only",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/01b0d97daa105954bda4c2b770effc9c3cf2d090/original.png",
+   "link": "https://www.pgccislamicstore.com.au/shop/online-only/TOJY7FNKLPLC7II2DHR6VNDP"
+  }
  ]
 }
