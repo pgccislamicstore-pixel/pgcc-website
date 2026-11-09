@@ -94,7 +94,7 @@ def build(items, rel, rules, counts, today):
 
     def link(o):
         it = o['item_data']
-        if it.get('ecom_visibility') != 'VISIBLE': return None
+        if it.get('ecom_visibility') not in (None, 'VISIBLE'): return None  # field is empty on some newer edits
         pl = (it.get('ecom_seo_data') or {}).get('permalink')
         return f"{SITE}/product/{pl}/{o['id']}" if pl else it.get('ecom_uri')
 
