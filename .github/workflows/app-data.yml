@@ -1,0 +1,32 @@
+name: Nightly app data from Square
+
+# Rebuilds prices.json (in-store price scanner) and data.json (offers + new arrivals)
+# from Square every night at about 2:15 am Melbourne time. Needs the repository secret SQUARE_TOKEN.
+on:
+  schedule:
+    - cron: '15 15 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build app data from Square
+        env:
+          SQUARE_TOKEN: ${{ secrets.SQUARE_TOKEN }}
+          DATA_FILE: data-new.json
+        run: python build_app_data.py
+      - name: Save changes
+        run: |
+          git config user.name "PGCC app bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add prices.json data.json data-new.json
+          git diff --cached --quiet || git commit -m "Nightly app data from Square"
+          git push
