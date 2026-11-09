@@ -110,6 +110,20 @@ nav button.on{color:var(--g);font-weight:bold}
 .code .c{font-size:26px;font-weight:bold;letter-spacing:3px;color:var(--g);margin:6px 0}
 .morelist a,.morelist button{display:flex;align-items:center;gap:14px;width:100%;background:#fff;border:0;border-radius:14px;padding:16px;margin:10px 0;font-size:16px;color:var(--tx);text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:left;font-family:inherit;cursor:pointer}
 .morelist svg{width:24px;height:24px;stroke:var(--g);fill:none;stroke-width:1.8;flex:none}
+.scanbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--g);text-decoration:none;font-weight:bold;border-radius:14px;padding:14px;font-size:16px;margin:12px 0;border:0;width:100%;font-family:inherit;cursor:pointer}
+.scanbtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
+#scanbox{position:relative;background:#000;border-radius:16px;overflow:hidden;aspect-ratio:3/4;max-height:58vh;margin:10px 0}
+#scanbox video{width:100%;height:100%;object-fit:cover;display:block}
+#scanbox .aim{position:absolute;left:12%;right:12%;top:38%;height:24%;border:3px solid var(--gold);border-radius:12px;box-shadow:0 0 0 2000px rgba(0,0,0,.35)}
+#scanbox .msg{position:absolute;left:0;right:0;bottom:10px;text-align:center;color:#fff;font-size:14px}
+.sres{background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin:10px 0;text-align:center}
+.sres img{width:170px;height:170px;object-fit:contain}
+.sres .nm{font-family:Georgia,serif;color:var(--g);font-size:19px;margin:6px 0}
+.sres .pr{font-size:30px;font-weight:bold;color:var(--g)}
+.sres .was{text-decoration:line-through;color:var(--mut);font-size:18px;margin-right:8px;font-weight:normal}
+.sres .pill{display:inline-block;background:#1d7a3e;color:#fff;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:bold;margin:6px 4px 0}
+.srow{display:flex;gap:8px}.srow>*{flex:1}
+.mcode{display:flex;gap:8px;margin:10px 0}.mcode input{flex:1;padding:12px;border-radius:12px;border:1px solid #ddd;font-size:16px}.mcode button{border:0;border-radius:12px;background:var(--g);color:var(--gold);font-weight:bold;padding:0 16px;font-size:15px}
 </style>
 </head>
 <body>
@@ -133,6 +147,7 @@ nav button.on{color:var(--g);font-weight:bold}
     <input type="search" name="q" placeholder="Search Qurans, dates, perfumes..." aria-label="Search products">
     <button type="submit">Search</button>
   </form>
+  <button type="button" class="scanbtn" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> In the shop? Scan a barcode for the price</button>
 
   <div class="card fri" id="friday" style="display:none">
     <div class="kick">Blessed Friday</div>
@@ -244,6 +259,7 @@ nav button.on{color:var(--g);font-weight:bold}
   <h2>Shop</h2>
   <form class="search" action="https://www.pgccislamicstore.com.au/s/search" method="get"><input type="search" name="q" placeholder="Search Qurans, dates, perfumes..." aria-label="Search products"><button type="submit">Search</button></form>
   <a class="bigbtn" href="https://www.pgccislamicstore.com.au/s/shop">Shop all products &rarr;</a>
+  <button type="button" class="scanbtn" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> Price scanner (in store)</button>
   <div class="cats"><a class="cat" href="https://www.pgccislamicstore.com.au/shop/quran-and-tafseer/9"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/58981334391eaafc38011abc7de324d5e81a3d2c/original.jpeg" alt="" loading="lazy"><span>Qurans</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/islamic-books/3NHLSB4L6DEHP3XB5RAN6SHO"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/ed6093f3826fc9f0da6634de3a18dce4eae584cf/original.jpeg" alt="" loading="lazy"><span>Islamic Books</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/little-muslims/CHABZEQZOQACCDGRA5XUJAWL"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c291a33f492a37da0e41e61a290921afb92d952a/original.jpeg" alt="" loading="lazy"><span>Kids</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/maktab-curriculum-resources/OZ57JKKCGDLMAG4MM56BD4RY"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/f128a2aa52d398a604e4e702f5db90b9300c5fec/original.jpeg" alt="" loading="lazy"><span>Maktab</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/arabian-perfumes-attars/67"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/997ca7e45f413329aa78a4e653723aef0d28e38a/original.jpeg" alt="" loading="lazy"><span>Perfumes &amp; Attars</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/islamic-essentials/B2MPRI46OTLXXJOJO6PPJRV2"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/43e1977821dc689514f7b28fd0571f1916ac1523/original.jpeg" alt="" loading="lazy"><span>Prayer Essentials</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/womens-collection/VHAO2XF3QFWLYLDF4IO6CJPM"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c5b4ee206eb1e5d0b86d8e2c9ee037d31a19c915/original.jpeg" alt="" loading="lazy"><span>Women</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/mens-collection/EIF4JFADRWD2D4JPHUFMBA3P"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/c4322ca9419b7400402f5a26321951a9758bc7fa/original.jpeg" alt="" loading="lazy"><span>Men</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/dates/64"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/202d2061bb048689f378822a1ffa2e2bb5ea689b/original.jpeg" alt="" loading="lazy"><span>Dates</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/zam-zam-water/29"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/f780c5ffd6ba4bd9b3ebbb172e4864e728ba4391/original.jpeg" alt="" loading="lazy"><span>Zam Zam Water</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/food-health/F4GUBJNFNBDKCZCQ2GUBV7SN"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/a86b4711406beebc000d371f4315b548948c45de/original.jpeg" alt="" loading="lazy"><span>Food &amp; Health</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/home-lifestyle/AEOOBQV2PA4TOE5ZUNTX4RDX"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/1a19ee8ccfe0244a085bfda529e6ca757d8a0cea/original.jpeg" alt="" loading="lazy"><span>Home &amp; Living</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/hajj-umrah/97"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/d40785be487602e76b5408613f8af048b5101b86/original.jpeg" alt="" loading="lazy"><span>Hajj &amp; Umrah</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/ramadan-eid/5IIHGBEAZSCGPVLH4H6AAX7P"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/5e71587fe743efd93fbbfe42df2074ae3a1ce45d/original.jpeg" alt="" loading="lazy"><span>Ramadan &amp; Eid</span></a><a class="cat" href="https://www.pgccislamicstore.com.au/shop/online-only/TOJY7FNKLPLC7II2DHR6VNDP"><img src="https://items-images-production.s3.us-west-2.amazonaws.com/files/01b0d97daa105954bda4c2b770effc9c3cf2d090/original.png" alt="" loading="lazy"><span>Online Only</span></a></div>
   <p style="text-align:center;font-size:13px;color:var(--mut);margin-top:18px">Free shipping Australia-wide over $250 &middot; Free click &amp; collect in Doveton &middot; Afterpay</p>
 </section>
@@ -259,12 +275,24 @@ nav button.on{color:var(--g);font-weight:bold}
 <section class="view" id="v-more">
   <h2>More</h2>
   <div class="morelist">
+    <button type="button" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg>Price scanner</button>
     <button type="button" data-go="qibla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>Qibla direction</button>
     <button type="button" data-go="duas"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></svg>Tasbih, dhikr &amp; duas</button>
     <button type="button" data-go="visit"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Visit us, opening hours &amp; contact</button>
     <a href="https://www.pgccislamicstore.com.au/s/order"><svg viewBox="0 0 24 24"><path d="M6 6h15l-2 8H8z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M6 6L5 3H2"/></svg>My cart</a>
     <a href="https://wa.me/61402301235"><svg viewBox="0 0 24 24"><path d="M4 20l1.5-4A8 8 0 1 1 9 19.5z"/></svg>WhatsApp us</a>
   </div>
+</section>
+
+<section class="view" id="v-scan">
+  <h2>Price scanner</h2>
+  <p style="color:var(--mut);font-size:14px;margin-top:-4px">Point your camera at the barcode or the price sticker on any product in our shop.</p>
+  <div id="scanbox" style="display:none"><video id="scanvid" playsinline muted></video><div class="aim"></div><div class="msg" id="scanmsg">Looking for a barcode...</div></div>
+  <div id="scanres"></div>
+  <div class="srow"><button type="button" class="scanbtn" id="scanstart"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> Scan</button><button type="button" class="scanbtn" id="scanphoto" style="background:var(--g);color:var(--gold)"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Take photo</button></div>
+  <input type="file" id="scanfile" accept="image/*" capture="environment" style="display:none">
+  <form class="mcode" id="scancode"><input inputmode="text" placeholder="Or type the number under the barcode" aria-label="Barcode number"><button type="submit">Find</button></form>
+  <p style="text-align:center;font-size:12.5px;color:var(--mut)" id="scanupd"></p>
 </section>
 
 </main>
@@ -283,7 +311,7 @@ var NAMES=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
 
 /* ---------- navigation ---------- */
 function show(v){document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});
-  var nv=({qibla:1,duas:1,visit:1})[v]?'more':v;document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
+  var nv=({qibla:1,duas:1,visit:1,scan:1})[v]?'more':v;if(v!=='scan'&&window.scanStop)scanStop();document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
   try{history.replaceState(null,'','#'+v)}catch(e){}}
 document.querySelectorAll('nav button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v)})});
 document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
@@ -510,6 +538,37 @@ var DAILY=[
   if(Notification.permission==='denied'){btn.style.display='none';card.querySelector('p').textContent='Notifications are blocked. You can turn them on in your phone settings for this app.';} }
  upd();
  btn.addEventListener('click',function(){window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(OS){try{await OS.Notifications.requestPermission()}catch(e){}upd()})});
+})();
+</script>
+<script>
+/* ---------- in-store price scanner (prices.json, rebuilt nightly from Square) ---------- */
+(function(){
+var P=null,stream=null,timer=null,det=null,zx=null,busy=false,last='';
+var box=document.getElementById('scanbox'),vid=document.getElementById('scanvid'),msg=document.getElementById('scanmsg'),res=document.getElementById('scanres');
+function e(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function m(c){var s=(c/100).toFixed(2);return '$'+s.replace(/\.00$/,'')}
+function load(){if(P)return Promise.resolve(P);return fetch('prices.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){P=d;if(d.updated)document.getElementById('scanupd').textContent='Prices updated '+d.updated+'. Final price at the counter.';return d})}
+function zxing(){if(zx)return Promise.resolve(zx);return new Promise(function(ok,no){var t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';t.onload=function(){var Z=window.ZXing,h=new Map();h.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.EAN_13,Z.BarcodeFormat.EAN_8,Z.BarcodeFormat.UPC_A,Z.BarcodeFormat.UPC_E,Z.BarcodeFormat.CODE_128,Z.BarcodeFormat.CODE_39,Z.BarcodeFormat.QR_CODE]);h.set(Z.DecodeHintType.TRY_HARDER,true);zx=new Z.BrowserMultiFormatReader(h);ok(zx)};t.onerror=no;document.head.appendChild(t)})}
+function card(x){var img=x.i?(P.img+x.i):'';var pr=x.s!=null&&x.s<x.p?'<span class="was">'+m(x.p)+'</span>'+m(x.s):m(x.p);
+ return '<div class="sres">'+(img?'<img src="'+e(img)+'" alt="">':'')+'<div class="nm">'+e(x.n)+'</div><div class="pr">'+pr+'</div>'+(x.d?'<span class="pill">On sale: '+e(x.d)+'</span>':'')+(x.m?'<span class="pill" style="background:var(--gold2)">'+e(x.m)+'</span>':'')+(x.u?'<a class="bigbtn" style="margin-top:12px" href="'+e(P.url+x.u)+'">View or buy online</a>':'')+'</div>'}
+function find(code){code=String(code||'').trim().toUpperCase().replace(/\s/g,'');if(!code)return;return load().then(function(d){var x=d.items[code]||d.items[code.replace(/^0+/,'')]||(code.length===13&&code[0]==='0'?d.items[code.slice(1)]:null);
+ if(!x){res.innerHTML='<div class="sres"><div class="nm">Not found</div><p style="color:var(--mut)">We couldn\'t find '+e(code)+'. Please ask our staff at the counter.</p></div>';return false}
+ res.innerHTML=(Array.isArray(x)?x:[x]).map(card).join('');if(navigator.vibrate)navigator.vibrate(60);return true})}
+window.scanStop=function(){clearInterval(timer);timer=null;if(zx)try{zx.reset()}catch(_){}if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}box.style.display='none'};
+function hit(code){if(!code||code===last)return;last=code;scanStop();find(code)}
+function start(){res.innerHTML='';last='';load();box.style.display='block';msg.textContent='Looking for a barcode...';
+ if('BarcodeDetector' in window){navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){stream=s;vid.srcObject=s;vid.play();
+   det=det||new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128','code_39','qr_code']});
+   timer=setInterval(function(){if(busy||vid.readyState<2)return;busy=true;det.detect(vid).then(function(b){busy=false;if(b.length)hit(b[0].rawValue)}).catch(function(){busy=false})},250)}).catch(camErr);return}
+ zxing().then(function(r){r.decodeFromVideoDevice(null,vid,function(out){if(out)hit(out.getText())}).then(function(){stream=vid.srcObject}).catch(camErr)}).catch(camErr)}
+function camErr(){box.style.display='none';res.innerHTML='<div class="sres"><div class="nm">Camera not available</div><p style="color:var(--mut)">Allow camera access for this app, or tap <b>Take photo</b>, or type the number under the barcode.</p></div>'}
+function photo(f){if(!f)return;res.innerHTML='<div class="sres">Reading barcode...</div>';var u=URL.createObjectURL(f),im=new Image();im.onload=function(){
+ var tryZ=function(){zxing().then(function(r){return r.decodeFromImageElement(im)}).then(function(o){find(o.getText())}).catch(function(){res.innerHTML='<div class="sres"><div class="nm">No barcode found</div><p style="color:var(--mut)">Take the photo closer, with the whole barcode in the picture, or type the number below.</p></div>'})};
+ if('BarcodeDetector' in window){new BarcodeDetector().detect(im).then(function(b){b.length?find(b[0].rawValue):tryZ()}).catch(tryZ)}else tryZ()};im.src=u}
+document.getElementById('scanstart').addEventListener('click',start);
+document.getElementById('scanphoto').addEventListener('click',function(){scanStop();document.getElementById('scanfile').click()});
+document.getElementById('scanfile').addEventListener('change',function(){photo(this.files[0]);this.value=''});
+document.getElementById('scancode').addEventListener('submit',function(ev){ev.preventDefault();scanStop();find(this.querySelector('input').value)});
 })();
 </script>
 </body>
