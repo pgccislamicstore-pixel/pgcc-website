@@ -110,6 +110,12 @@ nav button.on{color:var(--g);font-weight:bold}
 .code .c{font-size:26px;font-weight:bold;letter-spacing:3px;color:var(--g);margin:6px 0}
 .morelist a,.morelist button{display:flex;align-items:center;gap:14px;width:100%;background:#fff;border:0;border-radius:14px;padding:16px;margin:10px 0;font-size:16px;color:var(--tx);text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:left;font-family:inherit;cursor:pointer}
 .morelist svg{width:24px;height:24px;stroke:var(--g);fill:none;stroke-width:1.8;flex:none}
+.scanhome{display:flex;align-items:center;gap:14px;width:100%;background:var(--gold);color:var(--g);border:0;border-radius:16px;padding:12px 14px;margin:12px 0;font-family:inherit;text-align:left;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.scanhome .ic{flex:none;width:46px;height:46px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center}
+.scanhome .ic svg{width:24px;height:24px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round}
+.scanhome .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.scanhome .tx b{font-size:17px}.scanhome .tx small{font-size:13.5px;opacity:.85}
+.scanhome .ch{flex:none;width:22px;height:22px;fill:none;stroke:var(--g);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .scanbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--g);text-decoration:none;font-weight:bold;border-radius:14px;padding:14px;font-size:16px;margin:12px 0;border:0;width:100%;font-family:inherit;cursor:pointer}
 .scanbtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
 #scanbox{position:relative;background:#000;border-radius:16px;overflow:hidden;aspect-ratio:3/4;max-height:58vh;margin:10px 0}
@@ -147,7 +153,7 @@ nav button.on{color:var(--g);font-weight:bold}
     <input type="search" name="q" placeholder="Search Qurans, dates, perfumes..." aria-label="Search products">
     <button type="submit">Search</button>
   </form>
-  <button type="button" class="scanbtn" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> In the shop? Scan a barcode for the price</button>
+  <button type="button" class="scanhome" data-go="scan"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 9v6M11 9v6M14 9v6M17 9v6"/></svg></span><span class="tx"><b>Price check</b><small>In the shop? Scan any barcode</small></span><svg class="ch" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
 
   <div class="card fri" id="friday" style="display:none">
     <div class="kick">Blessed Friday</div>
@@ -549,7 +555,7 @@ var box=document.getElementById('scanbox'),vid=document.getElementById('scanvid'
 function e(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function m(c){var s=(c/100).toFixed(2);return '$'+s.replace(/\.00$/,'')}
 function load(){if(P)return Promise.resolve(P);return fetch('prices.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){P=d;if(d.updated)document.getElementById('scanupd').textContent='Prices updated '+d.updated+'. Final price at the counter.';return d})}
-function zxing(){if(zx)return Promise.resolve(zx);return new Promise(function(ok,no){var t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';t.onload=function(){var Z=window.ZXing,h=new Map();h.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.EAN_13,Z.BarcodeFormat.EAN_8,Z.BarcodeFormat.UPC_A,Z.BarcodeFormat.UPC_E,Z.BarcodeFormat.CODE_128,Z.BarcodeFormat.CODE_39,Z.BarcodeFormat.QR_CODE]);h.set(Z.DecodeHintType.TRY_HARDER,true);zx=new Z.BrowserMultiFormatReader(h);ok(zx)};t.onerror=no;document.head.appendChild(t)})}
+function zxing(){if(zx)return Promise.resolve(zx);return new Promise(function(ok,no){var t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';t.onload=function(){var Z=window.ZXing,h=new Map();h.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.EAN_13,Z.BarcodeFormat.EAN_8,Z.BarcodeFormat.UPC_A,Z.BarcodeFormat.UPC_E,Z.BarcodeFormat.CODE_128,Z.BarcodeFormat.CODE_39]);h.set(Z.DecodeHintType.TRY_HARDER,true);zx=new Z.BrowserMultiFormatReader(h);ok(zx)};t.onerror=no;document.head.appendChild(t)})}
 function card(x){var img=x.i?(P.img+x.i):'';var pr=x.s!=null&&x.s<x.p?'<span class="was">'+m(x.p)+'</span>'+m(x.s):m(x.p);
  return '<div class="sres">'+(img?'<img src="'+e(img)+'" alt="">':'')+'<div class="nm">'+e(x.n)+'</div><div class="pr">'+pr+'</div>'+(x.d?'<span class="pill">On sale: '+e(x.d)+'</span>':'')+(x.m?'<span class="pill" style="background:var(--gold2)">'+e(x.m)+'</span>':'')+(x.u?'<a class="bigbtn" style="margin-top:12px" href="'+e(P.url+x.u)+'">View or buy online</a>':'')+'</div>'}
 function find(code){code=String(code||'').trim().toUpperCase().replace(/\s/g,'');if(!code)return;return load().then(function(d){var x=d.items[code]||d.items[code.replace(/^0+/,'')]||(code.length===13&&code[0]==='0'?d.items[code.slice(1)]:null);
@@ -557,15 +563,27 @@ function find(code){code=String(code||'').trim().toUpperCase().replace(/\s/g,'')
  res.innerHTML=(Array.isArray(x)?x:[x]).map(card).join('');if(navigator.vibrate)navigator.vibrate(60);return true})}
 window.scanStop=function(){clearInterval(timer);timer=null;if(zx)try{zx.reset()}catch(_){}if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}box.style.display='none'};
 function hit(code){if(!code||code===last)return;last=code;scanStop();find(code)}
-function start(){res.innerHTML='';last='';load();box.style.display='block';msg.textContent='Looking for a barcode...';
- if('BarcodeDetector' in window){navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){stream=s;vid.srcObject=s;vid.play();
-   det=det||new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128','code_39','qr_code']});
-   timer=setInterval(function(){if(busy||vid.readyState<2)return;busy=true;det.detect(vid).then(function(b){busy=false;if(b.length)hit(b[0].rawValue)}).catch(function(){busy=false})},250)}).catch(camErr);return}
- zxing().then(function(r){r.decodeFromVideoDevice(null,vid,function(out){if(out)hit(out.getText())}).then(function(){stream=vid.srcObject}).catch(camErr)}).catch(camErr)}
+var CAM={video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false};
+function tune(s){try{var t=s.getVideoTracks()[0],c=t.getCapabilities?t.getCapabilities():{},a=[];if(c.focusMode&&c.focusMode.indexOf('continuous')>=0)a.push({focusMode:'continuous'});if(c.zoom&&c.zoom.max>=1.5)a.push({zoom:Math.min(2,c.zoom.max)});if(a.length)t.applyConstraints({advanced:a}).catch(function(){})}catch(_){}}
+var cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true}),tick=0;
+function grab(full){var w=vid.videoWidth,h=vid.videoHeight;if(!w)return null;var sx,sy,sw,sh;
+ if(full){sx=0;sy=0;sw=w;sh=h}else{sw=Math.round(w*.8);sh=Math.round(h*(w<h?.3:.45));sx=Math.round((w-sw)/2);sy=Math.round((h-sh)/2)}
+ var k=Math.min(1,(full?1280:1100)/sw);if(!full&&sw<700)k=1.6;cv.width=Math.round(sw*k);cv.height=Math.round(sh*k);cx.drawImage(vid,sx,sy,sw,sh,0,0,cv.width,cv.height);return cv}
+function zread(c){var Z=window.ZXing;try{var r=new Z.MultiFormatReader();r.setHints(zh);return r.decode(new Z.BinaryBitmap(new Z.HybridBinarizer(new Z.HTMLCanvasElementLuminanceSource(c)))).getText()}catch(_){return null}}
+var zh=null;
+function scanTick(){if(busy||vid.readyState<2)return;busy=true;tick++;var c=grab(tick%3===0);if(!c){busy=false;return}
+ if(det){det.detect(c).then(function(b){busy=false;if(b.length)hit(b[0].rawValue)}).catch(function(){busy=false})}
+ else{var t=zread(c);busy=false;if(t)hit(t)}}
+function start(){res.innerHTML='';last='';load();box.style.display='block';msg.textContent='Hold the barcode inside the gold box';
+ var ready=('BarcodeDetector' in window)?Promise.resolve().then(function(){det=det||new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128','code_39']})}):zxing().then(function(){var Z=window.ZXing;zh=new Map();zh.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.EAN_13,Z.BarcodeFormat.EAN_8,Z.BarcodeFormat.UPC_A,Z.BarcodeFormat.UPC_E,Z.BarcodeFormat.CODE_128,Z.BarcodeFormat.CODE_39]);zh.set(Z.DecodeHintType.TRY_HARDER,true)});
+ ready.then(function(){return navigator.mediaDevices.getUserMedia(CAM)}).then(function(s){stream=s;tune(s);vid.srcObject=s;vid.setAttribute('playsinline','');vid.play();clearInterval(timer);timer=setInterval(scanTick,180)}).catch(camErr)}
 function camErr(){box.style.display='none';res.innerHTML='<div class="sres"><div class="nm">Camera not available</div><p style="color:var(--mut)">Allow camera access for this app, or tap <b>Take photo</b>, or type the number under the barcode.</p></div>'}
+function sized(im,w){return new Promise(function(ok){if(im.naturalWidth<=w)return ok(im);var c=document.createElement('canvas'),k=w/im.naturalWidth;c.width=w;c.height=Math.round(im.naturalHeight*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);var o=new Image();o.onload=function(){ok(o)};o.src=c.toDataURL('image/jpeg',.92)})}
 function photo(f){if(!f)return;res.innerHTML='<div class="sres">Reading barcode...</div>';var u=URL.createObjectURL(f),im=new Image();im.onload=function(){
- var tryZ=function(){zxing().then(function(r){return r.decodeFromImageElement(im)}).then(function(o){find(o.getText())}).catch(function(){res.innerHTML='<div class="sres"><div class="nm">No barcode found</div><p style="color:var(--mut)">Take the photo closer, with the whole barcode in the picture, or type the number below.</p></div>'})};
- if('BarcodeDetector' in window){new BarcodeDetector().detect(im).then(function(b){b.length?find(b[0].rawValue):tryZ()}).catch(tryZ)}else tryZ()};im.src=u}
+ var fail=function(){res.innerHTML='<div class="sres"><div class="nm">No barcode found</div><p style="color:var(--mut)">Take the photo with the barcode filling most of the picture, or type the number below.</p></div>'};
+ var sizes=[1600,1000,2400,700],i=0;
+ var tryZ=function(){if(i>=sizes.length)return fail();var w=sizes[i++];zxing().then(function(r){return sized(im,w).then(function(x){return r.decodeFromImageElement(x)})}).then(function(o){find(o.getText())}).catch(tryZ)};
+ if('BarcodeDetector' in window){new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128','code_39']}).detect(im).then(function(b){b.length?find(b[0].rawValue):tryZ()}).catch(tryZ)}else tryZ()};im.src=u}
 document.getElementById('scanstart').addEventListener('click',start);
 document.getElementById('scanphoto').addEventListener('click',function(){scanStop();document.getElementById('scanfile').click()});
 document.getElementById('scanfile').addEventListener('change',function(){photo(this.files[0]);this.value=''});
