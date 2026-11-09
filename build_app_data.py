@@ -247,7 +247,7 @@ def main():
     if len(prices['items']) < 500:
         sys.exit('Too few items from Square - not overwriting the app data')
     json.dump(prices, open(os.path.join(outdir, 'prices.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
-    json.dump(data, open(os.path.join(outdir, 'data.json'), 'w'), ensure_ascii=False, indent=1)
+    json.dump(data, open(os.path.join(outdir, os.environ.get('DATA_FILE', 'data.json')), 'w'), ensure_ascii=False, indent=1)
     print('codes', len(prices['items']), 'offers', len(data['offers']), 'new', len(data['newArrivals']))
 
 
