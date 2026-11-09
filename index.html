@@ -66,7 +66,7 @@ table.pt tr.now td{color:var(--g);background:#FBF6E5}
 .row.today{font-weight:bold;color:var(--g)}
 .social a{display:inline-block;margin:4px 10px 4px 0;color:var(--g);font-weight:bold;text-decoration:none;font-size:14px}
 nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #E5E7EB;display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}
-nav button{flex:1;background:none;border:0;padding:9px 0 8px;font-size:11px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+nav button{flex:1;min-width:0;background:none;border:0;padding:9px 0 8px;font-size:10.5px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
 nav button svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 nav button.on{color:var(--g);font-weight:bold}
 #notif{display:none}
@@ -300,6 +300,7 @@ nav button.on{color:var(--g);font-weight:bold}
 <nav>
   <button class="on" data-v="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</button>
   <button data-v="shop"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Shop</button>
+  <button data-v="scan"><svg viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 9v6M11 9v6M14 9v6M17 9v6"/></svg>Scan</button>
   <button data-v="deals"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.5"/></svg>Deals</button>
   <button data-v="prayer"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Prayer</button>
   <button data-v="more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>More</button>
@@ -311,7 +312,7 @@ var NAMES=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
 
 /* ---------- navigation ---------- */
 function show(v){document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});
-  var nv=({qibla:1,duas:1,visit:1,scan:1})[v]?'more':v;if(v!=='scan'&&window.scanStop)scanStop();document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
+  var nv=({qibla:1,duas:1,visit:1})[v]?'more':v;if(v!=='scan'&&window.scanStop)scanStop();document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
   try{history.replaceState(null,'','#'+v)}catch(e){}}
 document.querySelectorAll('nav button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v)})});
 document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
