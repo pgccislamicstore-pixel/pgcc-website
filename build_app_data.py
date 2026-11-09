@@ -14,6 +14,13 @@ LOC = 'LYWGATNGEFJTN'
 SITE = 'https://www.pgccislamicstore.com.au'
 IMG = 'https://items-images-production.s3.us-west-2.amazonaws.com/files/'
 NEW_DAYS = 30
+# Shop tab: order of known categories (new ones go at the end, A-Z); Barakah Deals lives on the Deals tab
+CAT_ORDER = ['2EBUMR5MLCDQRUI3WMKPJK7T', '3NHLSB4L6DEHP3XB5RAN6SHO', 'CHABZEQZOQACCDGRA5XUJAWL', 'OZ57JKKCGDLMAG4MM56BD4RY',
+             'QK42J5IWZXUVIZ5OX5VTWYG7', 'B2MPRI46OTLXXJOJO6PPJRV2', 'VHAO2XF3QFWLYLDF4IO6CJPM', 'CAUXFZNU46JBAQVQ6ZI3ZPD2',
+             'EIF4JFADRWD2D4JPHUFMBA3P', 'CMOQEBNOW5MBBT6IDTTRQIKY', 'AFJK64SOZ66JO2IQDBUDLPOG', 'F4GUBJNFNBDKCZCQ2GUBV7SN',
+             'AEOOBQV2PA4TOE5ZUNTX4RDX', '6454UH6YOEVPLHNW4XK2XG64', '5IIHGBEAZSCGPVLH4H6AAX7P', 'TOJY7FNKLPLC7II2DHR6VNDP']
+EXTRA_CATS = {'CMOQEBNOW5MBBT6IDTTRQIKY', 'AFJK64SOZ66JO2IQDBUDLPOG', '6454UH6YOEVPLHNW4XK2XG64'}  # Dates, Zam Zam Water, Hajj & Umrah
+SKIP_CATS = {'G6Z7PSYIRN7Y6YSCKJDI4VBO'}  # Barakah Deals
 NEW_MAX = 12
 WELCOME = {
     "tag": "WELCOME OFFER",
@@ -53,6 +60,16 @@ def fetch():
         rules += d.get('objects', [])
         cursor = d.get('cursor')
         if not cursor: break
+    cats, cursor = [], None
+    while True:
+        b = {"object_types": ["CATEGORY"], "limit": 1000, "include_related_objects": True}
+        if cursor: b["cursor"] = cursor
+        d = api('catalog/search', b)
+        cats += d.get('objects', [])
+        for o in d.get('related_objects', []): rel[o['id']] = o
+        cursor = d.get('cursor')
+        if not cursor: break
+    rules += cats
     counts, cursor = {}, None
     while True:
         b = {"location_ids": [LOC], "states": ["IN_STOCK"], "limit": 1000}
@@ -221,7 +238,25 @@ def build(items, rel, rules, counts, today):
         e = {"name": o['item_data']['name'], "price": round(p / 100, 2), "img": image(o), "link": link(o)}
         if lab: e['badge'] = lab
         newarr.append(e)
-    data = {"updated": today, "offers": [WELCOME] + offers, "newArrivals": newarr}
+    # ---- Shop tab categories: top-level website categories with a picture, plus a few popular sub-categories ----
+    allcats = {o['id']: o for o in rules if o.get('type') == 'CATEGORY' and not o.get('is_deleted')}
+    def catimg(c):
+        for i in c['category_data'].get('image_ids') or []:
+            u = rel.get(i, {}).get('image_data', {}).get('url')
+            if u: return u
+    shop = []
+    for cid, c in allcats.items():
+        cd = c['category_data']
+        if not cd.get('online_visibility') or cid in SKIP_CATS: continue
+        if not (cd.get('is_top_level') or cid in EXTRA_CATS): continue
+        u = catimg(c)
+        if not u: continue
+        nm = re.sub(r"('s)?\s+Collection$", '', cd.get('name', '').strip())
+        pl = (cd.get('ecom_seo_data') or {}).get('permalink') or slug(nm)
+        shop.append({"name": nm, "img": u, "link": f"{SITE}/shop/{pl}/{cid}", "_o": CAT_ORDER.index(cid) if cid in CAT_ORDER else 999})
+    shop.sort(key=lambda x: (x['_o'], x['name']))
+    for x in shop: x.pop('_o')
+    data = {"updated": today, "offers": [WELCOME] + offers, "newArrivals": newarr, "categories": shop}
     return prices, data
 
 
