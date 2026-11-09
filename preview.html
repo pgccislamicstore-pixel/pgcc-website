@@ -70,6 +70,13 @@ nav button{flex:1;min-width:0;background:none;border:0;padding:9px 0 8px;font-si
 nav button svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 nav button.on{color:var(--g);font-weight:bold}
 #notif{display:none}
+.trk input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #D1D5DB;border-radius:12px;font-size:16px;margin:6px 0 10px;font-family:inherit}
+.trk label{font-size:13.5px;font-weight:bold;color:var(--g)}
+.tord{border-left:4px solid var(--gold)}
+.tord .st{display:inline-block;font-size:12.5px;font-weight:bold;padding:3px 10px;border-radius:12px;background:#FEF3C7;color:#92400E}
+.tord .st.sh{background:#DCFCE7;color:#166534}.tord .st.cx{background:#FEE2E2;color:#991B1B}
+.tsteps{display:flex;gap:6px;margin:12px 0 8px}.tsteps i{flex:1;height:6px;border-radius:3px;background:#E5E7EB}.tsteps i.on{background:var(--g)}
+.tord .tn{font-family:monospace;font-size:14px;word-break:break-all}
 .search{display:flex;gap:8px;margin-bottom:14px}
 .search input{flex:1;border:1px solid #E5E7EB;border-radius:22px;padding:12px 16px;font-size:16px;background:#fff;outline:none}
 .search button{border:0;border-radius:22px;background:var(--g);color:#fff;padding:0 18px;font-weight:bold;font-size:14px}
@@ -276,6 +283,7 @@ nav button.on{color:var(--g);font-weight:bold}
   <h2>More</h2>
   <div class="morelist">
     <button type="button" data-go="scan"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg>Price scanner</button>
+    <button type="button" data-go="track"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>Track my order</button>
     <button type="button" data-go="qibla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>Qibla direction</button>
     <button type="button" data-go="duas"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></svg>Tasbih, dhikr &amp; duas</button>
     <button type="button" data-go="visit"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Visit us, opening hours &amp; contact</button>
@@ -295,6 +303,20 @@ nav button.on{color:var(--g);font-weight:bold}
   <p style="text-align:center;font-size:12.5px;color:var(--mut)" id="scanupd"></p>
 </section>
 
+<section class="view" id="v-track">
+  <h2>Track my order</h2>
+  <p style="color:var(--mut);font-size:14px;margin-top:-4px">Enter the email you ordered with (or your order number) and your delivery postcode.</p>
+  <form class="card trk" id="trkform">
+    <label for="trkid">Email or order number</label>
+    <input id="trkid" autocomplete="email" placeholder="e.g. name@email.com" required>
+    <label for="trkpc">Delivery postcode</label>
+    <input id="trkpc" inputmode="numeric" maxlength="4" placeholder="e.g. 3175" required>
+    <button class="btn g" type="submit" style="width:100%;font-size:16px;padding:13px">Find my order</button>
+  </form>
+  <div id="trkres"></div>
+  <p style="text-align:center;font-size:12.5px;color:var(--mut)" id="trkupd"></p>
+</section>
+
 </main>
 
 <nav>
@@ -312,7 +334,7 @@ var NAMES=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
 
 /* ---------- navigation ---------- */
 function show(v){document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});
-  var nv=({qibla:1,duas:1,visit:1})[v]?'more':v;if(v!=='scan'&&window.scanStop)scanStop();document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
+  var nv=({qibla:1,duas:1,visit:1,track:1})[v]?'more':v;if(v!=='scan'&&window.scanStop)scanStop();document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===nv)});window.scrollTo(0,0);
   try{history.replaceState(null,'','#'+v)}catch(e){}}
 document.querySelectorAll('nav button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.v)})});
 document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
@@ -570,6 +592,27 @@ document.getElementById('scanstart').addEventListener('click',start);
 document.getElementById('scanphoto').addEventListener('click',function(){scanStop();document.getElementById('scanfile').click()});
 document.getElementById('scanfile').addEventListener('change',function(){photo(this.files[0]);this.value=''});
 document.getElementById('scancode').addEventListener('submit',function(ev){ev.preventDefault();scanStop();find(this.querySelector('input').value)});
+})();
+
+/* ---------- order tracking ---------- */
+(function(){
+var F=document.getElementById('trkform'),R=document.getElementById('trkres'),U=document.getElementById('trkupd'),D=null;
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function dt(d){try{return new Date(d+'T12:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'})}catch(e){return d}}
+function load(){return D?Promise.resolve(D):fetch('orders.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){D=j;return j})}
+async function h(a,pc){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('pgcc|'+a.trim().toLowerCase()+'|'+pc.trim()));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('').slice(0,24)}
+var ST={rc:['Order received',1,'We have your order and will pack it soon.'],pk:['Being packed',2,'We are packing your order now.'],sh:['Posted',3,'Your parcel is on its way.'],cx:['Cancelled',0,'This order was cancelled. Contact us if you have questions.']};
+F.addEventListener('submit',async function(e){e.preventDefault();
+  var id=document.getElementById('trkid').value.replace(/^#/,'').trim(),pc=document.getElementById('trkpc').value.trim();
+  R.innerHTML='<div class="card">Looking up your order...</div>';
+  try{var d=await load();U.textContent='Updated '+d.updated;var L=d.o[await h(id,pc)];
+    if(!L||!L.length){R.innerHTML='<div class="card"><b>We could not find an order with those details.</b><p style="margin:8px 0 12px;font-size:14.5px">Check the email or order number and the postcode you used at checkout. New orders can take up to an hour to show here.</p><a class="btn wa" href="https://wa.me/61402301235?text='+encodeURIComponent('Salam, I would like to check on my order')+'">Ask us on WhatsApp</a></div>';return}
+    R.innerHTML=L.slice(0,5).map(function(o){var s=ST[o.st]||ST.rc,steps='';
+      if(o.st!=='cx'){for(var i=1;i<=3;i++)steps+='<i class="'+(i<=s[1]?'on':'')+'"></i>';steps='<div class="tsteps">'+steps+'</div>'}
+      var t='';if(o.t){var au=/australia post|auspost|startrack/i.test(o.c||'');t='<p style="margin:10px 0 4px;font-size:13.5px;color:var(--mut)">'+esc(o.c||'Tracking')+' tracking number</p><div class="tn">'+esc(o.t)+'</div>'+(au?'<p style="margin:12px 0 0"><a class="btn" href="https://auspost.com.au/mypost/track/details/'+encodeURIComponent(o.t)+'">Track with Australia Post</a></p>':'')}
+      return '<div class="card tord"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b>Order of '+dt(o.d)+'</b><span class="st '+o.st+'">'+s[0]+'</span></div>'+steps+'<div style="font-size:14px">'+s[2]+(o.sd?' Posted '+dt(o.sd)+'.':'')+'</div><div style="font-size:13px;color:var(--mut);margin-top:6px">'+o.n+' item'+(o.n==1?'':'s')+' &middot; $'+Number(o.tot).toFixed(2)+'</div>'+t+'</div>'}).join('');
+  }catch(err){R.innerHTML='<div class="card">Sorry, tracking is not available right now. Please try again soon.</div>'}
+});
 })();
 </script>
 </body>
