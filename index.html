@@ -496,9 +496,13 @@ var DAILY=[
   txt.innerHTML='You opened this inside another app. Open it in your phone\'s browser to install.';
   btn.textContent=isIOS?'Open in Safari':'Open in Chrome';
  }
+ var isSam=/SamsungBrowser/i.test(navigator.userAgent)&&!inApp;
+ if(isSam){txt.innerHTML='On Samsung phones, please install with <b>Chrome</b>. Samsung Internet can show a false &ldquo;unsafe app&rdquo; warning.';btn.textContent='Install with Chrome';}
  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;});
  window.addEventListener('appinstalled',function(){card.style.display='none';ov.classList.remove('on');});
  btn.addEventListener('click',function(){
+  if(isSam){location.href='intent://app.pgccislamicstore.com.au/?src=samsung#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent('https://app.pgccislamicstore.com.au/?src=samsung-nochrome')+';end';
+   setTimeout(function(){open('Add to Home screen',st(1,'Tap <b>&#9776;</b> (menu, bottom right of Samsung Internet)')+st(2,'Tap <b>Add page to</b>, then <b>Home screen</b>')+st(3,'Tap <b>Add</b>. Done! (Do not use &ldquo;Install&rdquo; in Samsung Internet)'),false)},1500);return;}
   if(inApp){
    if(isAnd){location.href='intent://app.pgccislamicstore.com.au/?src=install#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(URL_)+';end';return;}
    try{location.href='x-safari-'+URL_;}catch(e){}
