@@ -46,6 +46,13 @@
  ],
  "newArrivals": [
   {
+   "name": "Rawdah Ballpoint Pen – 0.5mm",
+   "price": 2.5,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/656940618d9da136eab002811b5c114a04815fc2/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/rawdah-ballpoint-pen-0-5mm/LHCCM4VJ7JRECXNPSYMBBHGD",
+   "badge": "5% OFF"
+  },
+  {
    "name": "Raaz Mehendi Cone",
    "price": 5.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/134bfa15e2c49720ecef87667ab13ac90f1715ea/original.png",
@@ -110,12 +117,6 @@
    "price": 50.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/f7f82dc98fcb20f98bb13d52d1d73aaa2b104ddf/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/bismillah-metal-key-holder-with-shelf-black/GXP76GBGYS4PZ5AESMS5NK7E"
-  },
-  {
-   "name": "Allah & Muhammad Car Hanging Ornament – White with Red Stones",
-   "price": 10.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/2c7b570c3570012ca80705756640feb2a3226a7c/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/allah-muhammad-car-hanging-ornament-white-red-stones/AX55J4KJL45WTVOONV4IRXES"
   }
  ],
  "categories": [
