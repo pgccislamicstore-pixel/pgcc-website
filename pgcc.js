@@ -100,3 +100,14 @@ var s=document.createElement('style');s.textContent='.store-policy--margin-top .
 
 /* PGCC product photos on phones: hide green side strips and peeking photos */
 (function(){if(document.getElementById('pgcc-gallery-fix'))return;var s=document.createElement('style');s.id='pgcc-gallery-fix';s.textContent='@media (max-width:767px){.product-gallery .carousel__container{clip-path:inset(0 24px)}}';document.head.appendChild(s)})();
+
+/* PGCC no-jump homepage (Nov 2026): reserve space for the header and the 9 homepage embed boxes while they load, so the page doesn't jump (CLS). Heights measured 12 Nov 2026 at 360-1440px, kept slightly below real size. If homepage embeds are added/removed/reordered, re-measure and update H. */
+(function(){if(window.__pgccNoJump)return;window.__pgccNoJump=1;
+var p=location.pathname.replace(/\/+$/,'');if(p!==''&&p!=='/home')return;
+var s=document.createElement('style');s.id='pgcc-nojump';s.textContent='@media (max-width:480px){.w-header{min-height:85px}}@media (min-width:1024px){.w-header{min-height:190px}}';(document.head||document.documentElement).appendChild(s);
+var H={m:[211,340,422,344,305,788,413,986,723],t:[211,340,422,344,249,680,295,582,715],d:[219,375,424,388,249,680,295,582,715]};
+var w=window.innerWidth,T=w<600?H.m:(w<1024?H.t:H.d),n=0;
+function run(){var fc=document.querySelectorAll('.custom-code-container .frame-container');for(var i=0;i<fc.length&&i<T.length;i++){var e=fc[i];if(!e.__pgr){e.__pgr=1;if(fc.length>T.length)return stop();e.style.minHeight=Math.round(T[i]*0.95)+'px'}}if(++n>150)stop()}
+var iv=setInterval(run,100);function stop(){clearInterval(iv)}run();
+setTimeout(function(){var fc=document.querySelectorAll('.custom-code-container .frame-container');for(var i=0;i<fc.length;i++)fc[i].style.minHeight=''},20000);
+})();
