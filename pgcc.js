@@ -104,7 +104,8 @@ var s=document.createElement('style');s.textContent='.store-policy--margin-top .
 /* PGCC no-jump homepage (Nov 2026): reserve space for the header and the 9 homepage embed boxes while they load, so the page doesn't jump (CLS). Heights measured 12 Nov 2026 at 360-1440px, kept slightly below real size. If homepage embeds are added/removed/reordered, re-measure and update H. */
 (function(){if(window.__pgccNoJump)return;window.__pgccNoJump=1;
 var p=location.pathname.replace(/\/+$/,'');if(p!==''&&p!=='/home')return;
-var s=document.createElement('style');s.id='pgcc-nojump';s.textContent='@media (max-width:480px){.w-header{min-height:85px}}@media (min-width:1024px){.w-header{min-height:190px}}';(document.head||document.documentElement).appendChild(s);
+var s=document.createElement('style');s.id='pgcc-nojump';s.textContent='@media (max-width:480px){.w-header{min-height:85px}}@media (min-width:1024px){.w-header{min-height:190px}}.marquee{height:58px;overflow:hidden;visibility:hidden}html.pg-fonts .marquee{visibility:visible}';(document.head||document.documentElement).appendChild(s);
+var sh=function(){document.documentElement.classList.add('pg-fonts');clearInterval(fi)},fi=setInterval(function(){try{var li=document.querySelector('.marquee li');if(li&&document.fonts.status==='loaded'&&document.fonts.check(getComputedStyle(li).fontWeight+' 16px Poppins'))setTimeout(sh,80)}catch(e){sh()}},100);setTimeout(sh,4500);
 var H={m:[211,340,422,344,305,788,413,986,723],t:[211,340,422,344,249,680,295,582,715],d:[219,375,424,388,249,680,295,582,715]};
 var w=window.innerWidth,T=w<600?H.m:(w<1024?H.t:H.d),n=0;
 function run(){var fc=document.querySelectorAll('.custom-code-container .frame-container');for(var i=0;i<fc.length&&i<T.length;i++){var e=fc[i];if(!e.__pgr){e.__pgr=1;if(fc.length>T.length)return stop();e.style.minHeight=Math.round(T[i]*0.95)+'px'}}if(++n>150)stop()}
