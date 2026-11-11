@@ -122,6 +122,7 @@ nav button.on{color:var(--g);font-weight:bold}
 #scanbox video{width:100%;height:100%;object-fit:cover;display:block}
 #scanbox .aim{position:absolute;left:12%;right:12%;top:38%;height:24%;border:3px solid var(--gold);border-radius:12px;box-shadow:0 0 0 2000px rgba(0,0,0,.35)}
 #scanbox .torch{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:20px;display:none}#scanbox .torch.on{background:var(--gold);color:var(--g)}
+#scanbox .zoom{position:absolute;top:10px;left:10px;min-width:52px;height:44px;border-radius:22px;border:0;background:rgba(0,0,0,.55);color:#fff;font-weight:bold;font-size:15px;display:none;font-family:inherit}
 #scanbox .msg{position:absolute;left:0;right:0;bottom:10px;text-align:center;color:#fff;font-size:14px}
 .sres{background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin:10px 0;text-align:center}
 .sres img{width:170px;height:170px;object-fit:contain}
@@ -294,7 +295,7 @@ nav button.on{color:var(--g);font-weight:bold}
 <section class="view" id="v-scan">
   <h2>Price scanner</h2>
   <p style="color:var(--mut);font-size:14px;margin-top:-4px">Point your camera at the barcode or the price sticker on any product in our shop.</p>
-  <div id="scanbox" style="display:none"><video id="scanvid" playsinline muted></video><div class="aim"></div><button type="button" class="torch" id="scantorch" aria-label="Torch">&#128294;</button><div class="msg" id="scanmsg">Looking for a barcode...</div></div>
+  <div id="scanbox" style="display:none"><video id="scanvid" playsinline muted></video><div class="aim"></div><button type="button" class="zoom" id="scanzoom" aria-label="Zoom">1x</button><button type="button" class="torch" id="scantorch" aria-label="Torch">&#128294;</button><div class="msg" id="scanmsg">Looking for a barcode...</div></div>
   <div id="scanres"></div>
   <div class="srow"><button type="button" class="scanbtn" id="scanstart"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg> Scan</button><button type="button" class="scanbtn" id="scanphoto" style="background:var(--g);color:var(--gold)"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Take photo</button></div>
   <input type="file" id="scanfile" accept="image/*" capture="environment" style="display:none">
@@ -572,25 +573,25 @@ function find(code){code=String(code||'').trim().toUpperCase().replace(/\s/g,'')
  res.innerHTML=(Array.isArray(x)?x:[x]).map(card).join('');if(navigator.vibrate)navigator.vibrate(60);return true})}
 window.scanStop=function(){clearInterval(timer);timer=null;if(zx)try{zx.reset()}catch(_){}if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}box.style.display='none'};
 function hit(code){if(!code||code===last)return;last=code;scanStop();find(code)}
-var CAM={video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false};
+var CAM={video:{facingMode:{ideal:'environment'},width:{ideal:2560},height:{ideal:1440}},audio:false},multi=false;
 function pickCam(){if(!navigator.mediaDevices.enumerateDevices)return Promise.resolve(null);return navigator.mediaDevices.enumerateDevices().then(function(l){var v=l.filter(function(d){return d.kind==='videoinput'&&d.label});var pref=['back triple camera','back dual wide camera','back dual camera'];for(var i=0;i<pref.length;i++){for(var j=0;j<v.length;j++)if(v[j].label.toLowerCase()===pref[i])return v[j].deviceId}return null}).catch(function(){return null})}
-function tune(s){try{var t=s.getVideoTracks()[0],c=t.getCapabilities?t.getCapabilities():{},a=[];if(c.focusMode&&c.focusMode.indexOf('continuous')>=0)a.push({focusMode:'continuous'});if(c.zoom&&c.zoom.max>=1.5)a.push({zoom:Math.min(2,c.zoom.max)});var tb=document.getElementById('scantorch');tb.style.display=c.torch?'block':'none';tb.classList.remove('on');tb.onclick=function(){var on=!tb.classList.contains('on');t.applyConstraints({advanced:[{torch:on}]}).then(function(){tb.classList.toggle('on',on)}).catch(function(){})};if(a.length)t.applyConstraints({advanced:a}).catch(function(){})}catch(_){}}
+function tune(s){try{var t=s.getVideoTracks()[0],c=t.getCapabilities?t.getCapabilities():{},a=[];if(c.focusMode&&c.focusMode.indexOf('continuous')>=0)a.push({focusMode:'continuous'});var zb=document.getElementById('scanzoom');zb.style.display='none';if(c.zoom&&c.zoom.max>=1.5){var z0=Math.min(multi?3:2,c.zoom.max),L=[z0,z0*1.5,z0*2].filter(function(z){return z<=c.zoom.max}),zi=0;a.push({zoom:z0});if(L.length>1){zb.style.display='block';zb.textContent='1x';zb.onclick=function(){zi=(zi+1)%L.length;t.applyConstraints({advanced:[{zoom:L[zi]}]}).then(function(){zb.textContent=(L[zi]/z0)+'x'}).catch(function(){})}}}var tb=document.getElementById('scantorch');tb.style.display=c.torch?'block':'none';tb.classList.remove('on');tb.onclick=function(){var on=!tb.classList.contains('on');t.applyConstraints({advanced:[{torch:on}]}).then(function(){tb.classList.toggle('on',on)}).catch(function(){})};if(a.length)t.applyConstraints({advanced:a}).catch(function(){})}catch(_){}}
 var cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true}),tick=0;
 function grab(full){var w=vid.videoWidth,h=vid.videoHeight;if(!w)return null;var sx,sy,sw,sh;
  if(full){sx=0;sy=0;sw=w;sh=h}else{sw=Math.round(w*.8);sh=Math.round(h*(w<h?.3:.45));sx=Math.round((w-sw)/2);sy=Math.round((h-sh)/2)}
- var k=Math.min(1,(full?1280:1100)/sw);if(!full&&sw<700)k=1.6;cv.width=Math.round(sw*k);cv.height=Math.round(sh*k);cx.drawImage(vid,sx,sy,sw,sh,0,0,cv.width,cv.height);return cv}
+ var k=Math.min(1,(full?1400:1600)/sw);if(!full&&sw<700)k=1.6;cv.width=Math.round(sw*k);cv.height=Math.round(sh*k);cx.drawImage(vid,sx,sy,sw,sh,0,0,cv.width,cv.height);return cv}
 function zread(c){var Z=window.ZXing;try{var r=new Z.MultiFormatReader();r.setHints(zh);return r.decode(new Z.BinaryBitmap(new Z.HybridBinarizer(new Z.HTMLCanvasElementLuminanceSource(c)))).getText()}catch(_){return null}}
 var zh=null;
 function scanTick(){if(busy||vid.readyState<2)return;busy=true;tick++;var c=grab(tick%3===0);if(!c){busy=false;return}
  if(det){det.detect(c).then(function(b){busy=false;if(b.length)hit(b[0].rawValue)}).catch(function(){busy=false})}
  else{var t=zread(c);busy=false;if(t)hit(t)}}
-function start(){res.innerHTML='';last='';load();box.style.display='block';msg.textContent='Hold the barcode in the gold box, about a hand away';
+function start(){res.innerHTML='';last='';multi=false;load();box.style.display='block';msg.textContent='Hold the barcode in the gold box, about a hand away';
  var ready=getDet().catch(function(){det=null;return zxing().then(function(){var Z=window.ZXing;zh=new Map();zh.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.EAN_13,Z.BarcodeFormat.EAN_8,Z.BarcodeFormat.UPC_A,Z.BarcodeFormat.UPC_E,Z.BarcodeFormat.CODE_128,Z.BarcodeFormat.CODE_39]);zh.set(Z.DecodeHintType.TRY_HARDER,true)})});
  var go=function(s){stream=s;tune(s);vid.srcObject=s;vid.setAttribute('playsinline','');vid.play();clearInterval(timer);timer=setInterval(scanTick,150)};
  ready.then(function(){return navigator.mediaDevices.getUserMedia(CAM)}).then(function(s){
   if(!/iPhone|iPad|iPod/.test(navigator.userAgent))return go(s);
   return pickCam().then(function(id){var cur=s.getVideoTracks()[0].getSettings().deviceId;if(!id||id===cur)return go(s);
-   s.getTracks().forEach(function(t){t.stop()});return navigator.mediaDevices.getUserMedia({video:{deviceId:{exact:id},width:{ideal:1920},height:{ideal:1080}},audio:false}).then(go).catch(function(){return navigator.mediaDevices.getUserMedia(CAM).then(go)})})}).catch(camErr)}
+   s.getTracks().forEach(function(t){t.stop()});return navigator.mediaDevices.getUserMedia({video:{deviceId:{exact:id},width:{ideal:2560},height:{ideal:1440}},audio:false}).then(function(s2){var tr=s2.getVideoTracks()[0],cp=tr.getCapabilities?tr.getCapabilities():{};if(cp.zoom&&cp.zoom.max>=2){multi=true;return go(s2)}s2.getTracks().forEach(function(t){t.stop()});return navigator.mediaDevices.getUserMedia(CAM).then(go)}).catch(function(){return navigator.mediaDevices.getUserMedia(CAM).then(go)})})}).catch(camErr)}
 function camErr(){box.style.display='none';res.innerHTML='<div class="sres"><div class="nm">Camera not available</div><p style="color:var(--mut)">Allow camera access for this app, or tap <b>Take photo</b>, or type the number under the barcode.</p></div>'}
 function sized(im,w){return new Promise(function(ok){if(im.naturalWidth<=w)return ok(im);var c=document.createElement('canvas'),k=w/im.naturalWidth;c.width=w;c.height=Math.round(im.naturalHeight*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);var o=new Image();o.onload=function(){ok(o)};o.src=c.toDataURL('image/jpeg',.92)})}
 function photo(f){if(!f)return;res.innerHTML='<div class="sres">Reading barcode...</div>';var u=URL.createObjectURL(f),im=new Image();im.onload=function(){
