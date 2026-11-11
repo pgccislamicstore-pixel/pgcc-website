@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11",
+ "updated": "2026-11-12",
  "offers": [
   {
    "tag": "WELCOME OFFER",
@@ -42,9 +42,22 @@
    "text": "Hab Shifa TQ+ Organic Black Seed Oil 250ml + Hab Shifa Black Seed Oil 60 Gummies.",
    "link": "https://www.pgccislamicstore.com.au/product/hab-shifa-tq-organic-black-seed-oil-250ml/J5JOY62WGQCNOZQYBXP2QSDJ",
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/7669997415fded61898ee5287ea237d1cc44b7c5/original.png"
+  },
+  {
+   "tag": "$10 OFF",
+   "title": "Maktab Book Set – Bundle & Save $10",
+   "text": "PGCC Maktab Book Set – New Students (Grades 1–8), ASLA Maktab Book Set – New Students (Grades 1–8). Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/product/pgcc-maktab-set-b-new-students/COB4CHZRK7S4OLJDHHMK2R4G",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/03561240d7de6962c902d5ca71c1db2165fb3a8f/original.png"
   }
  ],
  "newArrivals": [
+  {
+   "name": "Maktab Book Set – Returning Students (Grades 1–8)",
+   "price": 75.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/be5d071da727d6ee927f47a7318c3e42dfb0c09d/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/maktab-book-set-returning-students/V4NVROCNZYFKC6BHLUW5UHFN"
+  },
   {
    "name": "Hab Shifa TQ+ Organic Black Seed Oil 200ml (Glass Bottle)",
    "price": 45.0,
@@ -111,12 +124,6 @@
    "price": 120.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/50c58049b4153f9d911a30e7d07f66c31a8b60c7/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/allah-muhammad-metal-wall-art-2-piece-set/VWJHFRDYURDRTMYWRBML5OD4"
-  },
-  {
-   "name": "First Kalima Metal Islamic Wall Art – Black, 70 cm",
-   "price": 80.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/59a2c5873c8e5c2a741232cd30e9c024e4fcd573/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/first-kalima-metal-islamic-wall-art-black-70cm/WZHU5VINHXHJY3CIJF7WAAUV"
   }
  ],
  "categories": [
