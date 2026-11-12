@@ -605,5 +605,9 @@ document.getElementById('scanfile').addEventListener('change',function(){photo(t
 document.getElementById('scancode').addEventListener('submit',function(ev){ev.preventDefault();scanStop();find(this.querySelector('input').value)});
 })();
 </script>
+<script>
+/* Install counter: counts each installed app once per phone. Sends no names or personal details. */
+(function(){try{var s=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;if(!s)return;if(localStorage.getItem('pgccInstCounted'))return;fetch('https://abacus.jasoncameron.dev/hit/pgcc-islamic-store-app/installs').then(function(r){if(r.ok)localStorage.setItem('pgccInstCounted','1');}).catch(function(){});}catch(e){}})();
+</script>
 </body>
 </html>
