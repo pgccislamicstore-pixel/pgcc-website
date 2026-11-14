@@ -116,3 +116,15 @@ for(var i=0;i<fc.length;i++){var e=fc[i];if(T&&!e.__pgr){e.__pgr=1;e.__t=Date.no
 if(++n>200)stop(true)}
 var iv=setInterval(run,100);function stop(all){clearInterval(iv);if(all){var fc=document.querySelectorAll('[data-pgh]');for(var i=0;i<fc.length;i++)fc[i].removeAttribute('data-pgh')}}run();
 })();
+/* PGCC accessibility: readable text on dark sections, frame titles, pinch zoom (14 Nov 2026) */
+(function(){if(window.__pgccA11y)return;window.__pgccA11y=1;var D=document;
+function rgb(s){return (s.match(/[\d.]+/g)||[0,0,0]).map(Number)}
+function lum(c){var a=c.slice(0,3).map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*a[0]+.7152*a[1]+.0722*a[2]}
+function rat(a,b){var x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function opaque(s){var m=rgb(s.backgroundColor);return s.backgroundColor!=='transparent'&&(m.length<4||m[3]>.9)}
+function secBg(el){var p=el;while(p){var s=getComputedStyle(p);if(opaque(s))return rgb(s.backgroundColor);p=p.parentElement}return [255,255,255]}
+function fix(root,w,outer){[].forEach.call(root.querySelectorAll('*'),function(el){if(el.dataset.pgc)return;if(![].some.call(el.childNodes,function(t){return t.nodeType===3&&t.textContent.trim()}))return;var cs=w.getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden')return;var bg=null,q=el;while(q){var s=w.getComputedStyle(q);if(s.backgroundImage!=='none')return;if(opaque(s)){bg=rgb(s.backgroundColor);break}q=q.parentElement}if(!bg)bg=outer;var c=rgb(cs.color),sz=parseFloat(cs.fontSize),big=sz>=24||(sz>=18.6&&+cs.fontWeight>=700),need=big?3.1:4.6;if(rat(c,bg)>=need)return;var n;if(lum(bg)<.2){n=el.closest('a')?[233,196,106]:[243,235,216]}else{n=c.slice(0,3);for(var i=0;i<20&&rat(n,bg)<need;i++)n=n.map(function(v){return Math.round(v*.85)})}el.style.setProperty('color','rgb('+n.join(',')+')','important');el.dataset.pgc=1})}
+function run(){var m=D.querySelector('meta[name=viewport]');if(m&&/maximum-scale|user-scalable/.test(m.content))m.content='width=device-width, initial-scale=1';
+D.querySelectorAll('iframe').forEach(function(f){var d;try{d=f.contentDocument}catch(e){}if(!f.title){var h=d&&d.querySelector('h1,h2,h3');f.title=h?h.textContent.trim().slice(0,60):'PGCC Islamic Store'}if(d&&d.body&&f.offsetHeight)fix(d.body,f.contentWindow,secBg(f.parentElement))});
+D.querySelectorAll('.pgu').forEach(function(h){if(h.shadowRoot)fix(h.shadowRoot,window,secBg(h.parentElement))})}
+var k=0,t=setInterval(function(){run();if(++k>20)clearInterval(t)},1000);run()})();
