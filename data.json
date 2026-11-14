@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14",
+ "updated": "2026-11-15",
  "offers": [
   {
    "tag": "WELCOME OFFER",
@@ -52,6 +52,12 @@
   }
  ],
  "newArrivals": [
+  {
+   "name": "Tube Hijab Cap – Sky Blue",
+   "price": 6.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/85dfd7626e6bb6d0f7748894f8fdef0297ea4832/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/tube-hijab-cap-sky-blue/AIZC2RTZU43QRTWLBFK5BSEB"
+  },
   {
    "name": "Men's 3/4 Pants (Sirwal)",
    "price": 45.0,
@@ -118,12 +124,6 @@
    "price": 5.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/134bfa15e2c49720ecef87667ab13ac90f1715ea/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/raaz-mehendi-cone/4EYADRK2ZVX2W2ZKLQJZ5IZF"
-  },
-  {
-   "name": "Surah Al-Ikhlas Metal Wall Art – Matte Gold, 70 cm",
-   "price": 199.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/d3e9b5bbfbb564752f2dee2cc35cd7070029a305/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/surah-al-ikhlas-metal-wall-art-matte-gold-70cm/ODIQJYFWAMZFPKDQHTWBB7YV"
   }
  ],
  "categories": [
