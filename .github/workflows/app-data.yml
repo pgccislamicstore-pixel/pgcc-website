@@ -1,6 +1,6 @@
 name: App data from Square
 
-# Rebuilds prices.json (in-store price scanner) and data.json (offers + new arrivals) from Square.
+# Rebuilds prices.json (in-store price scanner), data.json (offers + new arrivals) and chatgpt-feed.csv (ChatGPT product feed) from Square.
 # Runs every hour from about 9:15 am to 10:15 pm Melbourne time, plus 2:15 am. Needs the repository secret SQUARE_TOKEN.
 # Only product, price and offer data - never customer or order data (the repo is public).
 on:
@@ -29,7 +29,7 @@ jobs:
         run: |
           git config user.name "PGCC app bot"
           git config user.email "actions@users.noreply.github.com"
-          git add prices.json data.json
+          git add prices.json data.json chatgpt-feed.csv
           git diff --cached --quiet && exit 0
           git commit -m "App data from Square"
           git pull --rebase
