@@ -2,8 +2,9 @@
 """Nightly build of the PGCC Islamic Store app data from Square.
 
 Writes (in the repo root):
-  prices.json  - every in-store item by barcode/SKU, for the in-app price scanner
-  data.json    - offers + new arrivals for the Home and Deals screens
+  prices.json       - every in-store item by barcode/SKU, for the in-app price scanner
+  data.json         - offers + new arrivals for the Home and Deals screens
+  chatgpt-feed.csv  - in-stock online products for ChatGPT Business Hub (hosted URL, fetched daily)
 
 Run by .github/workflows/app-data.yml with the SQUARE_TOKEN secret (read-only token).
 Can also run offline for testing: build_app_data.py --local p1.json p2.json ... --rules rules.json --counts counts.json
@@ -260,6 +261,78 @@ def build(items, rel, rules, counts, today):
     return prices, data
 
 
+# ---- ChatGPT product feed (chatgpt-feed.csv, read by ChatGPT Business Hub daily) ----
+# Catalogue data only (names, prices, photos, links, stock status). Never cost, supplier or customer data.
+BRAND_KEYS = ("Language|Script|Size|Pages|Cover|Edition|Author|Authors|Translator|Translation|Format|Binding|Ingredients|"
+              "Ingredient|Notes|Colour|Colours|Color|Material|Type|Volume|Volumes|Weight|Age|Ages|Includes|Origin|Scent|Scents|"
+              "Fragrance|Concentration|Servings|Per teaspoon|Free from|Dimensions|Contents|Content|Layout|Level|ISBN|Country|"
+              "Made in|Range|Series|Pack|Quantity|Capacity|Power|Features|Use|Design|Fit|Fabric|Care|Style|Length|Width|Height|"
+              "Top notes|Heart notes|Base notes|Gender|Sizes|Fits|Shape|Finish|Packaging|Compiler|Illustrator|Publisher|Brand|"
+              "Manufacturer|Suitable for|Batteries|Display|Storage|Net weight|Product of|Grade|Variety|Shelf life|Paper|Print|Lines|"
+              "Juz|Mushaf|Arabic|English|Words|Subject|Topics|Topic|Theme|Genre|Duration|Contains|Allergens|Number of|Set of|Source|"
+              "Key ingredients|Key ingredient|Key oils|Key Ingredients|Key Oils|Also contains|Also Contains|Certification|Strength|"
+              "Blend|Flavour|Product|Process|Base oils|Essential oils|Black seed|Honey|Fish oil|Texture|Exfoliant|Dietary|Botanicals|"
+              "Oils|Extracts|TQ content|Glucosamine|Turmeric|Grinder")
+_NEXT = re.compile(r'\s+(?:%s)\b[^:]{0,3}:' % BRAND_KEYS)
+
+
+def brand_of(desc):
+    for lab in ('Brand', 'Publisher', 'Manufacturer', 'Made by'):
+        m = re.search(r'\b%s:\s*' % lab, desc)
+        if not m: continue
+        rest = desc[m.end():]
+        n = _NEXT.search(rest)
+        v = (rest[:n.start()] if n else rest[:60]).strip()
+        v = re.split(r'\s+[A-Z][A-Za-z ]{0,20}:', v)[0]
+        v = re.sub(r'\s*\(.*$', '', v)
+        v = re.sub(r',.*$', '', v).strip().rstrip('.;')
+        if 2 <= len(v) <= 40: return v
+    return 'PGCC Islamic Store'
+
+
+def chatgpt_feed(items, rel, counts):
+    import csv, io
+    def catname(o):
+        rc = (o['item_data'].get('reporting_category') or {}).get('id')
+        return rel.get(rc, {}).get('category_data', {}).get('name', '') if rc else ''
+    rows = []
+    for o in items:
+        it = o['item_data']
+        if not here(o) or it.get('is_archived'): continue
+        if it.get('ecom_visibility') not in (None, 'VISIBLE'): continue
+        pl = (it.get('ecom_seo_data') or {}).get('permalink')
+        url = f"{SITE}/product/{pl}/{o['id']}" if pl else it.get('ecom_uri')
+        if not url: continue
+        name = re.sub(r'\s+', ' ', it.get('name', '')).strip()
+        desc = re.sub(r'\s+', ' ', it.get('description_plaintext') or it.get('description') or name).strip()[:5000]
+        vs = [v for v in it.get('variations', []) if not v.get('is_deleted')]
+        brand = brand_of(desc)
+        for v in vs:
+            vd = v['item_variation_data']
+            amt = (vd.get('price_money') or {}).get('amount') or 0
+            if amt <= 0 or vd.get('pricing_type') == 'VARIABLE_PRICING': continue
+            if counts.get(v['id'], 0) <= 0: continue
+            title = name
+            vn = (vd.get('name') or '').strip()
+            if len(vs) > 1 and vn and vn != 'Regular' and not re.search(r'(?<!\w)' + re.escape(vn.lower()) + r'(?!\w)', name.lower()):
+                title = name + ' – ' + vn
+            img = None
+            for i in (vd.get('image_ids') or []) + (it.get('image_ids') or []):
+                img = rel.get(i, {}).get('image_data', {}).get('url')
+                if img: break
+            if not img: continue
+            gtin = next((c for c in (vd.get('upc'), vd.get('sku')) if c and re.fullmatch(r'\d{8}|\d{12,14}', c)), '')
+            rows.append({'item_id': v['id'], 'title': title[:150], 'description': desc, 'url': url, 'brand': brand,
+                         'seller_name': 'PGCC Islamic Store', 'image_url': img, 'availability': 'in_stock',
+                         'price': '%.2f AUD' % (amt / 100), 'condition': 'new', 'gtin': gtin,
+                         'product_category': catname(o), 'target_countries': '["AU"]', 'store_country': 'AU'})
+    rows.sort(key=lambda r: r['item_id'])
+    buf = io.StringIO()
+    w = csv.DictWriter(buf, fieldnames=list(rows[0].keys()) if rows else ['item_id'], lineterminator='\n')
+    w.writeheader(); w.writerows(rows)
+    return buf.getvalue(), len(rows)
+
+
 def main():
     today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=10))).date().isoformat()
     if '--local' in sys.argv:
@@ -284,6 +357,10 @@ def main():
     json.dump(prices, open(os.path.join(outdir, 'prices.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     for fn in {'data.json', os.environ.get('DATA_FILE', 'data.json')}:
         json.dump(data, open(os.path.join(outdir, fn), 'w'), ensure_ascii=False, indent=1)
+    feed, n = chatgpt_feed(items, rel, counts)
+    if n >= 500:
+        open(os.path.join(outdir, 'chatgpt-feed.csv'), 'w', encoding='utf-8').write(feed)
+    print('chatgpt feed', n)
     print('codes', len(prices['items']), 'offers', len(data['offers']), 'new', len(data['newArrivals']))
 
 
