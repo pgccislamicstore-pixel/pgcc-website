@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17",
+ "updated": "2026-11-18",
  "offers": [
   {
    "tag": "WELCOME OFFER",
@@ -52,6 +52,18 @@
   }
  ],
  "newArrivals": [
+  {
+   "name": "Modal Hijab – Dark Teal",
+   "price": 20.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/60a89ffc20aa4dde82c00cd8a5c14fbfeefd5b28/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/modal-hijab-dark-teal/JA5RWTHKGNXELZRPASAVKAFX"
+  },
+  {
+   "name": "Two-Piece Slip-On Hijab",
+   "price": 15.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/a1987ccdfe552a7fb3278de97fcaacc374f22e67/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/two-piece-slip-on-hijab-royal-blue/JX742RSCIS6KNVT7W3ZBJ4HL"
+  },
   {
    "name": "Girls Jersey Slip-On Hijab",
    "price": 15.0,
@@ -111,18 +123,6 @@
    "price": 5.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/978e620aa22ad150dc283ad510bea2cdaa172945/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/straightening-the-lines-for-prayer-abu-khaliyl/CELF624RDFPFS7F2B7EEC52O"
-  },
-  {
-   "name": "Have You Discovered Its Real Beauty? – Dr. Naji Ibrahim Arfaj",
-   "price": 10.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/a20a31abc4a1d0e21a9b7af2ea5fa3e1aacba3f7/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/have-you-discovered-its-real-beauty/WNEGFFTRCXHTFKOGMKEHTGMP"
-  },
-  {
-   "name": "The Prayer of Muhammad ﷺ – Dr. Syed Shafiq Ur-Rahman",
-   "price": 10.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/26b049e75dc19d8fcb4b02032ff12c7b9b6e065f/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/the-prayer-of-muhammad-shafiq-ur-rahman/VADPTX5BBMWMSJSMIKPJT3RB"
   }
  ],
  "categories": [
