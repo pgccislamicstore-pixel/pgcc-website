@@ -53,6 +53,12 @@
  ],
  "newArrivals": [
   {
+   "name": "Girls Jersey Slip-On Hijab",
+   "price": 15.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/a2dbb220f84a2d379ef5ef688a94fd6ef340e5c5/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/girls-jersey-slip-on-hijab/JEIPEB5YF4ZVTNTMC3JX33RC"
+  },
+  {
    "name": "Fatawa on Fasting, Zakat & Traweeh – Al-Uthaymeen & Al-Jibreen",
    "price": 6.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/c75db2538be46a3d65d97b3efdfe964be421c427/original.png",
@@ -117,12 +123,6 @@
    "price": 10.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/26b049e75dc19d8fcb4b02032ff12c7b9b6e065f/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/the-prayer-of-muhammad-shafiq-ur-rahman/VADPTX5BBMWMSJSMIKPJT3RB"
-  },
-  {
-   "name": "Golden Sayings of Prophet Muhammad ﷺ – Sinhala",
-   "price": 6.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/1c6d042eb2954f7b1e9ddbe84474475abfe20d85/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/golden-sayings-prophet-muhammad-sinhala/V5QE4XPLJOTOYVZTKTUPBW5B"
   }
  ],
  "categories": [
