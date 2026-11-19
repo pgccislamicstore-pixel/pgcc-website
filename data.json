@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-20",
  "offers": [
   {
    "tag": "WELCOME OFFER",
@@ -52,6 +52,12 @@
   }
  ],
  "newArrivals": [
+  {
+   "name": "Jersey Hijab – Black, 85 × 185 cm",
+   "price": 15.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/d8d3faf98989f5b319d4f26314d8e7409ac3feaa/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/product/jersey-hijab-black/ZHDLKZCD5X5M7767KYH5TNX7"
+  },
   {
    "name": "Black Yashmagh – Shemagh Scarf, 58 x 58 in",
    "price": 25.0,
@@ -117,12 +123,6 @@
    "price": 10.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b9bd0edd60d6939dc8b387caa1c40455d3f8c511/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/a-brief-summary-of-fiqh-essentials-saheeh-international/OYEXK74HISABV2OFX5ZZSTWW"
-  },
-  {
-   "name": "The Project – Childhood Champions (George Green)",
-   "price": 10.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/30c9114eb04ed23e59498dedd42d640ab8bdf388/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/the-project-childhood-champions-george-green/QBJ4DCKQRUZ2PYZUNRDO4HZM"
   }
  ],
  "categories": [
