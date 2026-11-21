@@ -128,3 +128,43 @@ function run(){var m=D.querySelector('meta[name=viewport]');if(m&&/maximum-scale
 D.querySelectorAll('iframe').forEach(function(f){var d;try{d=f.contentDocument}catch(e){}if(!f.title){var h=d&&d.querySelector('h1,h2,h3');f.title=h?h.textContent.trim().slice(0,60):'PGCC Islamic Store'}if(d&&d.body&&f.offsetHeight)fix(d.body,f.contentWindow,secBg(f.parentElement))});
 D.querySelectorAll('.pgu').forEach(function(h){if(h.shadowRoot)fix(h.shadowRoot,window,secBg(h.parentElement))})}
 var k=0,t=setInterval(function(){run();if(++k>20)clearInterval(t)},1000);run()})();
+
+/* PGCC homepage extras (20 Nov 2026): moving gold sale banner (date-limited) above Shop by category, and a sliding "Brands we stock" strip after Barakah Deals. Inserted by a MutationObserver as soon as Square builds the page (before paint, so no jump). Change SALE to reuse the banner for Ramadan/Eid; it hides itself after the end date. */
+(function(){if(window.__pgccHomeX)return;window.__pgccHomeX=1;
+var p=location.pathname.replace(/\/+$/,'');if(p!==''&&p!=='/home')return;
+var SALE={start:'2026-11-27T00:00:00+11:00',end:'2026-12-01T00:00:00+11:00',title:'Blessed Friday Sale',dates:'27 to 30 November, in store and online',before:'Starts Friday 27 November',during:'On now, ends Monday night',btn:'See the deals',href:'/shop/barakah-deals/G6Z7PSYIRN7Y6YSCKJDI4VBO'};
+var BRANDS=['Darussalam','Kube Publishing','Hab Shifa','Al Haramain','Goodword','Learning Roots','Osmani Fragrances','Oh So Halal','Sweet Sunnah','IIPH','Ard Al Zaafaran','Lawung'];
+var now=Date.now(),showSale=now<Date.parse(SALE.end);
+var css='.pgx-ban{position:relative;margin:14px 0 6px;border-radius:14px;padding:30px 18px 28px;text-align:center;overflow:hidden;background:linear-gradient(120deg,#0f2a1f,#1f3a2e,#6b5320,#c9a24a,#1f3a2e,#0f2a1f);background-size:400% 400%;animation:pgxg 12s ease infinite;color:#fff;font-family:Poppins,system-ui,sans-serif}'
++'.pgx-ban .k{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#F3EBD8}'
++'.pgx-ban h2{font-size:30px;line-height:1.15;margin:8px 0 6px;color:#fff;font-weight:600;text-shadow:0 2px 12px rgba(0,0,0,.4)}'
++'.pgx-ban p{font-size:15px;margin:0;color:#F3EBD8}'
++'.pgx-ban a{display:inline-block;margin-top:14px;background:#E9C46A;color:#1f3a2e;font-weight:600;font-size:15px;padding:10px 22px;border-radius:24px;text-decoration:none}'
++'@keyframes pgxg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}'
++'.pgx-br{margin:18px 0;background:#16291f;border-top:1px solid rgba(233,196,106,.35);border-bottom:1px solid rgba(233,196,106,.35);padding:16px 0 18px;font-family:Poppins,system-ui,sans-serif}'
++'.pgx-br h2{text-align:center;color:#E9C46A;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;margin:0 0 12px}'
++'.pgx-mq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}'
++'.pgx-tr{display:flex;width:max-content;animation:pgxs 40s linear infinite}.pgx-mq:hover .pgx-tr{animation-play-state:paused}'
++'.pgx-it{display:flex;align-items:center;gap:10px;padding:0 22px;white-space:nowrap;color:#F3EBD8;font-size:17px;font-weight:600}'
++'.pgx-it i{width:6px;height:6px;transform:rotate(45deg);background:#E9C46A;opacity:.8;display:inline-block}'
++'.pgx-it:nth-child(3n+2){font-style:italic;font-weight:500;font-family:Georgia,serif}'
++'@keyframes pgxs{to{transform:translateX(-50%)}}'
++'@media (min-width:768px){.pgx-ban{padding:38px 24px 34px}.pgx-ban h2{font-size:40px}.pgx-it{font-size:19px}}'
++'@media (prefers-reduced-motion:reduce){.pgx-ban,.pgx-tr{animation:none}}';
+var st=document.createElement('style');st.id='pgcc-homex';st.textContent=css;(document.head||document.documentElement).appendChild(st);
+function ban(){var d=document.createElement('section');d.className='pgx-ban';d.setAttribute('aria-label',SALE.title);
+ var k=now<Date.parse(SALE.start)?SALE.before:SALE.during;
+ d.innerHTML='<div class="k"></div><h2></h2><p></p><a></a>';d.querySelector('.k').textContent=k;d.querySelector('h2').textContent=SALE.title;d.querySelector('p').textContent=SALE.dates;var a=d.querySelector('a');a.textContent=SALE.btn;a.href=SALE.href;return d}
+function strip(){var d=document.createElement('section');d.className='pgx-br';d.setAttribute('aria-label','Brands we stock');
+ var one=BRANDS.map(function(b){return '<span class="pgx-it"><i></i>'+b+'</span>'}).join('');
+ d.innerHTML='<h2>Brands we stock</h2><div class="pgx-mq"><div class="pgx-tr">'+one+'<span aria-hidden="true" style="display:contents">'+one+'</span></div></div>';return d}
+function place(){var cc=document.querySelectorAll('main .custom-code-container');if(cc.length<2)return false;
+ var c0=cc[0].closest('.w-block-wrapper'),c1=cc[1].closest('.w-block-wrapper');if(!c0||!c1)return false;
+ c0=c0.parentElement;c1=c1.parentElement;
+ if(showSale&&!document.querySelector('.pgx-ban'))c0.parentElement.insertBefore(ban(),c0);
+ if(!document.querySelector('.pgx-br'))c1.parentElement.insertBefore(strip(),c1.nextSibling);
+ return true}
+if(!place()){var mo=new MutationObserver(function(){if(place())mo.disconnect()});mo.observe(document.documentElement,{childList:true,subtree:true});setTimeout(function(){mo.disconnect()},20000)}
+// if Square re-renders and drops them, put them back (first 15 s)
+var rk=0,ri=setInterval(function(){if((showSale&&!document.querySelector('.pgx-ban'))||!document.querySelector('.pgx-br'))place();if(++rk>30)clearInterval(ri)},500);
+})();
