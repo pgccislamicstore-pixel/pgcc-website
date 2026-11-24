@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "offers": [
   {
    "tag": "WELCOME OFFER",
@@ -53,6 +53,24 @@
  ],
  "newArrivals": [
   {
+   "name": "Crinkle Hijab – Raspberry, 70 × 150 cm",
+   "price": 12.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/c53dc73420be4af9456ca87db9aaeaeaab455d71/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/crinkle-hijab-raspberry/LMUH7N2BDCN7RS3RV6BBBKD4"
+  },
+  {
+   "name": "Crinkle Hijab – Royal Blue, 70 × 150 cm",
+   "price": 12.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b73b7899b675e0f4d5084dc81bb5c7e17a85f33b/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/crinkle-hijab-royal-blue/T2XDMZRSYADV3JJP2IPT22XM"
+  },
+  {
+   "name": "Chiffon Hijab – Black, 70 × 180 cm",
+   "price": 12.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/efc5d8241560ac0bf25ada3c6cfbfc44582fa24a/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/chiffon-hijab-black/3ZPRZXBHPQJ25IS3742LWETS"
+  },
+  {
    "name": "No Ordinary Day – Childhood Champions (George Green)",
    "price": 5.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/89b2896c5a37ac740e46047455c1189abf6e3b2f/original.png",
@@ -105,24 +123,6 @@
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b2ab02dc3e3bf1ea947b38623eccea08f5bab8e8/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/jersey-hijab-latte/J2JIZSCLRSOQCZASLLCUXWFN"
-  },
-  {
-   "name": "Jersey Hijab – Pink, 85 × 185 cm",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/bf9ee9c47496b2d7b9dd860b30f5df695ad9a006/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/jersey-hijab-pink/MSFP7CYEQCSXFP3SJ247QOY2"
-  },
-  {
-   "name": "Jersey Hijab – Blue, 85 × 185 cm",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/ab4f1b7bdcd507b207bf08d255c8fa41795b8b51/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/jersey-hijab-blue/VVBOWTL3GT7B34IYXLBLCYN5"
-  },
-  {
-   "name": "Jersey Hijab – Antique Gold, 85 × 185 cm",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/71f643782d19a4d1cf9a2991b38ea19fa4b09d64/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/jersey-hijab-antique-gold/7DKDONVM4IX5ZIJ2GIW2THD5"
   }
  ],
  "categories": [
