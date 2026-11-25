@@ -53,6 +53,12 @@
  ],
  "newArrivals": [
   {
+   "name": "Girls Black Abaya with Pockets",
+   "price": 40.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/13c44fccd51d77cdd275ce0ea5b34bc1d5cd0a19/original.png",
+   "link": "https://www.pgccislamicstore.com.au/product/girls-black-abaya-with-pockets/TXOVTU3ZJ5VENMKRDPKUQ4MH"
+  },
+  {
    "name": "Girls Black Abaya",
    "price": 40.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/988fe27a2dddc1463520c6546a231444c51a33d9/original.png",
@@ -117,12 +123,6 @@
    "price": 12.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/104e7a83943046485ca454c50dd2839475cf75a8/original.png",
    "link": "https://www.pgccislamicstore.com.au/product/pleated-hijab-grey/ZJ7JD4FW3ZJLJPZOD6TD5MPX"
-  },
-  {
-   "name": "Pleated Hijab – Denim Blue, 70 × 150 cm",
-   "price": 12.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/de14f00c1db43366e16e4685c368d1b98fe14a05/original.png",
-   "link": "https://www.pgccislamicstore.com.au/product/pleated-hijab-denim-blue/BSVPLZEN52HGBBPBISE5QJYZ"
   }
  ],
  "categories": [
