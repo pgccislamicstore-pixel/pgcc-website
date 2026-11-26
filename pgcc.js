@@ -177,3 +177,13 @@ var rk=0,ri=setInterval(function(){if((showSale&&!document.querySelector('.pgx-b
 
 /* pgcc-card-titles (27 Nov 2026): product names on product cards at 14px, max 4 lines, so cards line up. */
 (function(){if(document.getElementById('pgcc-card-titles'))return;var st=document.createElement('style');st.id='pgcc-card-titles';st.textContent='.product-group__text .w-product-title{font-size:14px!important;line-height:1.3!important;display:-webkit-box!important;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-height:5.2em}.product-group__link .badge-row{display:flex!important;flex-direction:column-reverse!important;align-items:flex-start!important;gap:4px}';(document.head||document.documentElement).appendChild(st)})();
+
+/* pgcc-bf-home: homepage Barakah Deals section shows as Blessed Friday Sale until 1 Dec 2026 */
+(function(){var END=new Date('2026-12-01T00:00:00+11:00');if(new Date()>=END)return;var BF='/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH';
+function fix(root){try{var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);var n;while(n=w.nextNode()){if(n.nodeValue.indexOf('Barakah Deals')>-1){n.nodeValue=n.nodeValue.replace(/Barakah Deals/g,'Blessed Friday Sale')}}
+root.querySelectorAll('a[href*="barakah-deals"]').forEach(function(a){a.setAttribute('href',BF)});
+root.querySelectorAll('*').forEach(function(e){if(e.shadowRoot)fix(e.shadowRoot)});
+root.querySelectorAll('iframe').forEach(function(f){try{if(f.contentDocument&&f.contentDocument.body)fix(f.contentDocument.body)}catch(x){}})}catch(x){}}
+function run(){if(document.body)fix(document.body)}
+var k=0,t=setInterval(function(){run();if(++k>40)clearInterval(t)},750);
+document.addEventListener('DOMContentLoaded',run);})();
