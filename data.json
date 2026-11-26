@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26",
+ "updated": "2026-11-27",
  "offers": [
   {
    "tag": "WELCOME OFFER",
@@ -49,6 +49,55 @@
    "text": "PGCC Maktab Book Set – New Students (Grades 1–8), ASLA Maktab Book Set – New Students (Grades 1–8). Discount taken off in your cart.",
    "link": "https://www.pgccislamicstore.com.au/product/pgcc-maktab-set-b-new-students/COB4CHZRK7S4OLJDHHMK2R4G",
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/03561240d7de6962c902d5ca71c1db2165fb3a8f/original.png"
+  },
+  {
+   "tag": "30% OFF",
+   "title": "Blessed Friday – 30% Off Selected Books",
+   "text": "Healing Body & Soul – Urdu (Sehat Mand Zindagi), You Can Be the Happiest Woman in the World – Urdu, Wanita yang Paling Bahagia di Dunia (Malay) and more. Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/d143e15bb7931442bcd3b0dc25fdccab494c3dbc/original.jpeg"
+  },
+  {
+   "tag": "10% OFF",
+   "title": "Blessed Friday – 10% Off My Salah Mats",
+   "text": "My Salah Mat – Interactive Prayer Mat for Kids, My Salah Mat – Smart Interactive Prayer Mat for Adults. Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/ffe61ce471d9683870f5dbe267cf8c2a4728c971/original.jpeg"
+  },
+  {
+   "tag": "16.6667% OFF",
+   "title": "Blessed Friday – Counters 2 for $10 ($6)",
+   "text": "Digital Finger Counter with LED Light. Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b64c965334f455638f162ec37398660de5f1d489/original.jpeg"
+  },
+  {
+   "tag": "23.0769% OFF",
+   "title": "Blessed Friday – Counters 2 for $10 ($6.50)",
+   "text": "Digital Finger Counter with LED Light – Gift Box. Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/aa2ebe8ca4858fad5c23a2ffcd901f0589313265/original.jpeg"
+  },
+  {
+   "tag": "28.5714% OFF",
+   "title": "Blessed Friday – Counters 2 for $10 ($7)",
+   "text": "Digital Finger Counter with Time & Backlight, Keychain Digital Tasbih Counter with LED. Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/32a52b578d7a74d7f5626314949f944d4ca17ce7/original.jpeg"
+  },
+  {
+   "tag": "5% OFF",
+   "title": "Blessed Friday – 5% Off Hijabs",
+   "text": "Chiffon Hijab – Black, 70 × 180 cm, Girls Jersey Slip-On Hijab, Girls Slip-On Hijab – Large and more. Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/efc5d8241560ac0bf25ada3c6cfbfc44582fa24a/original.png"
+  },
+  {
+   "tag": "5% OFF",
+   "title": "Blessed Friday – 5% Off Kids Book Sets",
+   "text": "Baby’s First Box of Quran Stories – Vol 1 (Set of 5 Board Books), Baby’s First Box of Quran Stories – Vol 2 (Set of 5 Board Books), Let’s Visit The Three Sacred Mosques – Pop-up Box Set and more. Discount taken off in your cart.",
+   "link": "https://www.pgccislamicstore.com.au/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH",
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/c348afc294c30c85a4f19aaddfa068e6d6fef5b1/original.jpeg"
   }
  ],
  "newArrivals": [
@@ -66,7 +115,7 @@
    "link": "https://www.pgccislamicstore.com.au/product/mamool-maryam-turabi/DGWPYZKT3YFZJO3OJ2QNFPMA"
   },
   {
-   "name": "Mamool Khadija",
+   "name": "Mamool Khadija – Emirati Incense Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/4ccd8670ca4fcf517577bbb3ee4ec66bc1b4ded3/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mamool-khadija/3CULSAU46QMUFYEGV4MT2RBD"
@@ -84,43 +133,43 @@
    "link": "https://www.pgccislamicstore.com.au/product/mabsoos-sandaliya-blue/C5UUDKYDVMGSXHJO554OI6MH"
   },
   {
-   "name": "Mamool Akher Mawed",
+   "name": "Mamool Akher Mawed – Emirati Incense Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/cc74de95ce0af2d6f936b856f692ce7379996e4a/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mamool-akher-mawed/5COROWGMKFK3FMOETZP2JJ3X"
   },
   {
-   "name": "Mabsoos Taib",
+   "name": "Mabsoos Taib – Perfumed Wood Chips Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/d8bf35945b73c1f24fdfdbf2e83efe2105ca0162/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mabsoos-taib/AEBCX7AZNOIG57TYY63772HG"
   },
   {
-   "name": "Mamool Al Badar",
+   "name": "Mamool Al Badar – Emirati Incense Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/5d8c7a0b1a5fe26786e5eba91a4a862d0ff9cea7/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mamool-al-badar/5GEJQFMVLAMZRJTQZEDHWOVE"
   },
   {
-   "name": "Mamool Misk al Oudh",
+   "name": "Mamool Misk al Oudh – Emirati Incense Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b8bce2c88d568883a23e7cac6f837a6b226693a7/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mamool-misk-al-oudh/TCTLOZCFMSG5J553QGGARB3E"
   },
   {
-   "name": "Mamool Al Jazeerah",
+   "name": "Mamool Al Jazeerah – Emirati Incense Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/e9810755af65b3de56355061c46c1ac6325daea7/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mamool-al-jazeerah/EY7YNZMKGWTDU3IUET62NA23"
   },
   {
-   "name": "Mabsoos Jouri",
+   "name": "Mabsoos Jouri – Perfumed Wood Chips Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/9225109aa34794f71faaa0968da8b0caa9664068/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mabsoos-jouri/RNDEEGTPJLEYONFZJX3LTCG4"
   },
   {
-   "name": "Mamool Mumtaz",
+   "name": "Mamool Mumtaz – Emirati Incense Jar",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/7e0b934f045d4d6d024d9276f43f8eb884418a3e/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mamool-mumtaz/7RPEJYVUZ6QBF5RBX3UVL4ZX"
