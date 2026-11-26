@@ -168,3 +168,6 @@ if(!place()){var mo=new MutationObserver(function(){if(place())mo.disconnect()})
 // if Square re-renders and drops them, put them back (first 15 s)
 var rk=0,ri=setInterval(function(){if((showSale&&!document.querySelector('.pgx-ban'))||!document.querySelector('.pgx-br'))place();if(++rk>30)clearInterval(ri)},500);
 })();
+
+/* PGCC white behind product pictures (27 Nov 2026): pictures with see-through backgrounds (e.g. Purityfic) showed black on dark backgrounds. */
+(function(){if(document.getElementById('pgcc-img-white'))return;var st=document.createElement('style');st.id='pgcc-img-white';st.textContent='.figure__image img,.carousel__image img,.product-gallery img{background:#fff}';(document.head||document.documentElement).appendChild(st)})();
