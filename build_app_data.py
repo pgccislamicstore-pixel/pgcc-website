@@ -166,6 +166,8 @@ def build(items, rel, rules, counts, today):
         first = its[0]
         cats = [c for c in anyids if c in bycat]
         lnk = f"{SITE}/shop/{slug(catname.get(cats[0], 'shop'))}/{cats[0]}" if cats else link(first)
+        if name.lower().startswith('blessed friday'):  # sale offers open the sale category (27-30 Nov 2026)
+            lnk = f"{SITE}/shop/blessed-friday-sale/PKB7PYMFXBPM2O37QNUNQLWH"
         if allids:
             total = sum(price(x) or 0 for x in its)
             now = round(total * (1 - val[1] / 100)) if val[0] == 'pct' else total - val[1]
