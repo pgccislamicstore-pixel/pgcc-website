@@ -102,6 +102,24 @@
  ],
  "newArrivals": [
   {
+   "name": "Cream Yashmagh – Shemagh Scarf, 55 x 55 in",
+   "price": 25.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b89190ce3f6cdcbac8595975f960f19cc38d09c7/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/product/cream-yashmagh-shemagh-scarf-55-in/ERHWV7AMHG7AS2NBTE664V7D"
+  },
+  {
+   "name": "Hijab Pins – Ball-Head Hook Pins, Card of 12",
+   "price": 8.99,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/158600935cb1ccb8100318cd9c35f105feb6b261/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/product/hijab-pins-ball-head-hook-pins-12-pack/GTQKK2AH7EFAPA445AN3MJRR"
+  },
+  {
+   "name": "Hijab Crown – Anti-Slip Undercap Band",
+   "price": 12.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/04d92f9b5b87ac657795c6101fe44c37570f5ca8/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/product/hijab-crown-anti-slip-undercap-band/WH2PFINAIEAIQTNWTANKSBDZ"
+  },
+  {
    "name": "Rawdah Floral Water Bottle – Olive Green",
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/d0b485a8af81edf88455585fa94eadffbca14ab8/original.jpeg",
@@ -155,24 +173,6 @@
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b8bce2c88d568883a23e7cac6f837a6b226693a7/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mamool-misk-al-oudh/TCTLOZCFMSG5J553QGGARB3E"
-  },
-  {
-   "name": "Mamool Al Jazeerah – Emirati Incense Jar",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/e9810755af65b3de56355061c46c1ac6325daea7/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/mamool-al-jazeerah/EY7YNZMKGWTDU3IUET62NA23"
-  },
-  {
-   "name": "Mabsoos Jouri – Perfumed Wood Chips Jar",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/9225109aa34794f71faaa0968da8b0caa9664068/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/mabsoos-jouri/RNDEEGTPJLEYONFZJX3LTCG4"
-  },
-  {
-   "name": "Mamool Mumtaz – Emirati Incense Jar",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/7e0b934f045d4d6d024d9276f43f8eb884418a3e/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/mamool-mumtaz/7RPEJYVUZ6QBF5RBX3UVL4ZX"
   }
  ],
  "categories": [
