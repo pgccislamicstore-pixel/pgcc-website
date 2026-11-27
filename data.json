@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27",
+ "updated": "2026-11-28",
  "offers": [
   {
    "tag": "WELCOME OFFER",
@@ -102,6 +102,18 @@
  ],
  "newArrivals": [
   {
+   "name": "Ladies One-Piece White Jilbab with Sleeves – 3XL",
+   "price": 55.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b3bb37f6265e936754567b881e3c3dc61fe35d01/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/product/one-piece-white-jilbab-with-sleeves-3xl/4DZEJ22J2MMKTT2IQZFCCLGN"
+  },
+  {
+   "name": "Ladies Hajj 2-Piece White Abaya Set",
+   "price": 65.0,
+   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/95f8a8125e875ee093e8e2cdd5ee7c1341cb2c58/original.jpeg",
+   "link": "https://www.pgccislamicstore.com.au/product/ladies-hajj-2-piece-white-abaya-set/4GYLGKWWVNJRMY5TE2WVDEU6"
+  },
+  {
    "name": "Cream Yashmagh – Shemagh Scarf, 55 x 55 in",
    "price": 25.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b89190ce3f6cdcbac8595975f960f19cc38d09c7/original.jpeg",
@@ -161,18 +173,6 @@
    "price": 15.0,
    "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/d8bf35945b73c1f24fdfdbf2e83efe2105ca0162/original.jpeg",
    "link": "https://www.pgccislamicstore.com.au/product/mabsoos-taib/AEBCX7AZNOIG57TYY63772HG"
-  },
-  {
-   "name": "Mamool Al Badar – Emirati Incense Jar",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/5d8c7a0b1a5fe26786e5eba91a4a862d0ff9cea7/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/mamool-al-badar/5GEJQFMVLAMZRJTQZEDHWOVE"
-  },
-  {
-   "name": "Mamool Misk al Oudh – Emirati Incense Jar",
-   "price": 15.0,
-   "img": "https://items-images-production.s3.us-west-2.amazonaws.com/files/b8bce2c88d568883a23e7cac6f837a6b226693a7/original.jpeg",
-   "link": "https://www.pgccislamicstore.com.au/product/mamool-misk-al-oudh/TCTLOZCFMSG5J553QGGARB3E"
   }
  ],
  "categories": [
